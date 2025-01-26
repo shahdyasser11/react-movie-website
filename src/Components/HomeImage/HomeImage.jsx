@@ -102,7 +102,7 @@ const HomeImage = () => {
         </Button>
       </Box>
 
-      {/* New Div Below */}
+      {/* New Div */}
       <Box
         sx={{
           position: 'relative',
