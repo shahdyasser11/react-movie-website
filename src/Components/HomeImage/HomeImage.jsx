@@ -101,56 +101,6 @@ const HomeImage = () => {
           Watch Free
         </Button>
       </Box>
-
-      {/* New Div */}
-      <Box
-        sx={{
-          position: 'relative',
-          zIndex: 3, 
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          height: 'auto', 
-          textAlign: 'left',
-          px: 4,
-          maxWidth: '1200px',
-          margin: '20px auto', 
-          backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-          padding: '20px', 
-        }}
-      >
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 500,
-            color: '#fff',
-            mb: 2,
-            fontSize: {
-              xs: '1.2rem',
-              sm: '1.8rem',
-              md: '2.2rem',
-            },
-          }}
-        >
-          Additional Content Goes Here
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            fontSize: {
-              xs: '0.9rem', // Small screens
-              sm: '1rem', // Medium screens
-              md: '1.25rem', // Large screens
-            },
-            fontFamily: 'Arial, sans-serif',
-            color: '#fff',
-            mb: 4,
-          }}
-        >
-          Here you can add more details or other elements for your page, such as another call to action, description, or images.
-        </Typography>
-      </Box>
     </Box>
   );
 };
