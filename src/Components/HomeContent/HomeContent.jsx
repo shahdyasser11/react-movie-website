@@ -28,7 +28,7 @@ const HomeContent = () => {
                     textAlign: 'left',
                     px: 4,
                     maxWidth: '1200px',
-                    margin: '20px auto',
+                    // margin: 'auto',
                     backgroundColor: 'rgb(255, 255, 255)',
                     padding: '20px',
                 }}
@@ -109,80 +109,80 @@ const HomeContent = () => {
 
             {/* whats new box */}
             <Box
-  sx={{
-    position: 'relative',
-    zIndex: 3,
-    display: 'flex',
-    flexDirection: { xs: 'column', md: 'row' }, 
-    alignItems: 'center', 
-    justifyContent: 'space-between', 
-    height: 'auto',
-    textAlign: 'left',
-    px: 4,
-    maxWidth: '1200px',
-    margin: '20px auto',
-    background: 'linear-gradient(to right, rgb(201, 12, 201), rgb(68, 43, 227))',
-    padding: '8rem',
-  }}
->
-  {/* Text Section */}
-  <Box sx={{ flex: 1 }}>
-    <Typography variant="h4" gutterBottom sx={{ color: 'white', fontSize: '2rem', fontWeight: '600' }}>
-      See what’s new on
-      <br />
-      Pluto TV, Tubi, &
-      <br />
-      more.
-    </Typography>
+                sx={{
+                    position: 'relative',
+                    zIndex: 3,
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    height: 'auto',
+                    textAlign: 'left',
+                    px: 4,
+                    maxWidth: '1200px',
+                    // margin: '20px auto',
+                    background: 'linear-gradient(to right, rgb(201, 12, 201), rgb(68, 43, 227))',
+                    padding: '8rem',
+                }}
+            >
+                {/* Text Section */}
+                <Box sx={{ flex: 1 }}>
+                    <Typography variant="h4" gutterBottom sx={{ color: 'white', fontSize: '2rem', fontWeight: '600' }}>
+                        See what’s new on
+                        <br />
+                        Pluto TV, Tubi, &
+                        <br />
+                        more.
+                    </Typography>
 
-    <Typography variant="body1" color="text.secondary" sx={{ color: 'white' }}>
-      Select your favorite streaming services to
-      <br />
-      discover more, search faster, and get curated
-      <br />
-      recommendations—all without ever leaving Plex.<br />
-      Connect with friends to see who’s watching
-      <br />
-      what, where.
-    </Typography>
-    <Button
-      variant="contained"
-      sx={{
-        backgroundColor: '#EFB036',
-        color: 'white',
-        fontSize: {
-          xs: '0.8rem', // Small screens
-          sm: '0.9rem', // Medium screens
-          md: '1rem', // Large screens
-        },
-        fontWeight: 600,
-        padding: '8px 28px',
-        borderRadius: '30px',
-        textTransform: 'none',
-        marginTop: '1rem',
-        '&:hover': {
-          backgroundColor: '#FFB300',
-        },
-      }}
-    >
-      Discover More Now
-    </Button>
-  </Box>
+                    <Typography variant="body1" color="text.secondary" sx={{ color: 'white' }}>
+                        Select your favorite streaming services to
+                        <br />
+                        discover more, search faster, and get curated
+                        <br />
+                        recommendations—all without ever leaving Plex.<br />
+                        Connect with friends to see who’s watching
+                        <br />
+                        what, where.
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            backgroundColor: '#EFB036',
+                            color: 'white',
+                            fontSize: {
+                                xs: '0.8rem', // Small screens
+                                sm: '0.9rem', // Medium screens
+                                md: '1rem', // Large screens
+                            },
+                            fontWeight: 600,
+                            padding: '8px 28px',
+                            borderRadius: '30px',
+                            textTransform: 'none',
+                            marginTop: '1rem',
+                            '&:hover': {
+                                backgroundColor: '#FFB300',
+                            },
+                        }}
+                    >
+                        Discover More Now
+                    </Button>
+                </Box>
 
-  {/* Image Section */}
-  <Box
-    component="img"
-    src={devicesImage}
-    alt="applicable devices"
-    sx={{
-      flex: 1,
-      maxWidth: '65%', 
-      maxHeight: '65%', 
-      objectFit: 'contain', 
-      ml: { md: '2rem' }, 
-    }}
-  />
-</Box>
+                {/* Image Section */}
+                <Box
+                    component="img"
+                    src={devicesImage}
+                    alt="applicable devices"
+                    sx={{
+                        flex: 1,
+                        maxWidth: '63%',
+                        maxHeight: '63%',
+                        objectFit: 'contain',
+                        ml: { md: '2rem' },
+                    }}
+                />
+            </Box>
 
             {/* new box */}
             <Box
@@ -191,7 +191,7 @@ const HomeContent = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: 'auto',
-                    padding: '10rem',
+                    padding: '8rem',
                     background: 'white',
                 }}
             >
@@ -268,45 +268,45 @@ const HomeContent = () => {
 
             {/* partnership box */}
             <Box sx={{ padding: 4, backgroundColor: "#F5F5F5" }}>
-    <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: "600" }}>
-        Proud Partners with:
-    </Typography>
+                <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: "600" }}>
+                    Proud Partners with:
+                </Typography>
 
-    <Grid container spacing={1}>
-    {/* Partners grids */}
-    <Grid item xs={12}>
-        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-            {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
-                <Grid key={index} item>
-                    <Paper
-                        sx={{
-                            height: 100,
-                            width: 120, 
-                            backgroundColor: '#fff',
-                            boxShadow: 2,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <img
-                            src={imageSrc}
-                            alt={`photo${index + 1}`}
-                            style={{
-                                width: '70%',    
-                                height: '70%',
-                                objectFit: 'cover',
-                                borderRadius: '8px',
-                            }}
-                        />
-                    </Paper>
+                <Grid container spacing={1}>
+                    {/* Partners grids */}
+                    <Grid item xs={12}>
+                        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                            {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
+                                <Grid key={index} item>
+                                    <Paper
+                                        sx={{
+                                            height: 100,
+                                            width: 120,
+                                            backgroundColor: '#fff',
+                                            boxShadow: 2,
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <img
+                                            src={imageSrc}
+                                            alt={`photo${index + 1}`}
+                                            style={{
+                                                width: '70%',
+                                                height: '70%',
+                                                objectFit: 'cover',
+                                                borderRadius: '8px',
+                                            }}
+                                        />
+                                    </Paper>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
                 </Grid>
-            ))}
-        </Grid>
-    </Grid>
-</Grid>
 
-</Box>
+            </Box>
 
         </div>
     );
