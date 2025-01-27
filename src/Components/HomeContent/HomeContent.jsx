@@ -11,6 +11,7 @@ import mgm from '../../imgs/mmjpg.jpg'
 import lionsGate from '../../imgs/lionsgatepng.png'
 import legendary from '../../imgs/legendary.jpg'
 import magnolia from '../../imgs/magnolia.jpg'
+import devicesImage from '../../imgs/pms-devices-image.png'
 
 const HomeContent = () => {
     return (
@@ -106,67 +107,83 @@ const HomeContent = () => {
 
             </Box>
 
-            {/* New Box */}
+            {/* whats new box */}
             <Box
-                sx={{
-                    position: 'relative',
-                    zIndex: 3,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    justifyContent: 'center',
-                    height: 'auto',
-                    textAlign: 'left',
-                    px: 4,
-                    maxWidth: '1200px',
-                    margin: '20px auto',
-                    background: 'linear-gradient(to right, rgb(201, 12, 201), rgb(68, 43, 227))',
-                    padding: '8rem',
-                }}
-            >
-                <Typography variant="h4" gutterBottom sx={{ color: 'white', fontSize: '2rem', fontWeight: '600' }}>
-                    See what’s new on
-                    <br />
-                    Pluto TV, Tubi, &
-                    <br />
-                    more.
-                </Typography>
+  sx={{
+    position: 'relative',
+    zIndex: 3,
+    display: 'flex',
+    flexDirection: { xs: 'column', md: 'row' }, 
+    alignItems: 'center', 
+    justifyContent: 'space-between', 
+    height: 'auto',
+    textAlign: 'left',
+    px: 4,
+    maxWidth: '1200px',
+    margin: '20px auto',
+    background: 'linear-gradient(to right, rgb(201, 12, 201), rgb(68, 43, 227))',
+    padding: '8rem',
+  }}
+>
+  {/* Text Section */}
+  <Box sx={{ flex: 1 }}>
+    <Typography variant="h4" gutterBottom sx={{ color: 'white', fontSize: '2rem', fontWeight: '600' }}>
+      See what’s new on
+      <br />
+      Pluto TV, Tubi, &
+      <br />
+      more.
+    </Typography>
 
-                <Typography variant="body1" color="text.secondary" sx={{ color: 'white' }}>
-                    Select your favorite streaming services to
-                    <br />
-                    discover more, search faster, and get curated
-                    <br />
-                    recommendations—all without ever leaving Plex.<br />
-                    Connect with friends to see who’s watching
-                    <br />
-                    what, where.
-                </Typography>
-                <Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: '#EFB036',
-                        color: 'white',
-                        fontSize: {
-                            xs: '0.8rem',  // Small screens
-                            sm: '0.9rem',   // Medium screens
-                            md: '1rem',   // Large screens
-                        },
-                        fontWeight: 600,
-                        padding: '8px 28px',
-                        borderRadius: '30px',
-                        textTransform: 'none',
-                        marginTop: '1rem',
-                        marginLeft: '2rem',
-                        '&:hover': {
-                            backgroundColor: '#FFB300',
-                        },
-                    }}
-                >
-                    Discover More Now
-                </Button>
+    <Typography variant="body1" color="text.secondary" sx={{ color: 'white' }}>
+      Select your favorite streaming services to
+      <br />
+      discover more, search faster, and get curated
+      <br />
+      recommendations—all without ever leaving Plex.<br />
+      Connect with friends to see who’s watching
+      <br />
+      what, where.
+    </Typography>
+    <Button
+      variant="contained"
+      sx={{
+        backgroundColor: '#EFB036',
+        color: 'white',
+        fontSize: {
+          xs: '0.8rem', // Small screens
+          sm: '0.9rem', // Medium screens
+          md: '1rem', // Large screens
+        },
+        fontWeight: 600,
+        padding: '8px 28px',
+        borderRadius: '30px',
+        textTransform: 'none',
+        marginTop: '1rem',
+        '&:hover': {
+          backgroundColor: '#FFB300',
+        },
+      }}
+    >
+      Discover More Now
+    </Button>
+  </Box>
 
-            </Box>
+  {/* Image Section */}
+  <Box
+    component="img"
+    src={devicesImage}
+    alt="applicable devices"
+    sx={{
+      flex: 1,
+      maxWidth: '65%', 
+      maxHeight: '65%', 
+      objectFit: 'contain', 
+      ml: { md: '2rem' }, 
+    }}
+  />
+</Box>
+
             {/* new box */}
             <Box
                 sx={{
@@ -250,7 +267,7 @@ const HomeContent = () => {
             </Box>
 
             {/* partnership box */}
-            <Box sx={{ padding: 4, backgroundColor: "#DDDDDD" }}>
+            <Box sx={{ padding: 4, backgroundColor: "#F5F5F5" }}>
     <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: "600" }}>
         Proud Partners with:
     </Typography>
