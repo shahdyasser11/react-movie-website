@@ -14,7 +14,7 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
+import MenuIcon from '@mui/icons-material/Menu';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -29,7 +29,7 @@ function HomeNavbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Plex
       </Typography>
       <Divider />
       <List>
@@ -40,6 +40,17 @@ function HomeNavbar(props) {
             </ListItemButton>
           </ListItem>
         ))}
+        <Divider />
+        <ListItem disablePadding>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary="Sign In" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary="Sign Up" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -59,46 +70,57 @@ function HomeNavbar(props) {
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* Left Section */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton
-  color="inherit"
-  aria-label="slideshow"
-  sx={{
-    ml: 2,
-    fontSize: '5rem', 
-    '&:hover': {
-      color: '#FBBC04', 
-    },
-  }}
->
-  <SlideshowIcon />
-</IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="slideshow"
+              sx={{
+                ml: 2,
+                fontSize: '5rem', 
+                '&:hover': {
+                  color: '#FBBC04', 
+                },
+              }}
+            >
+              <SlideshowIcon />
+            </IconButton>
 
-<Typography variant="h6" sx={{ ml: 2, fontFamily: 'Comfortaa, sans-serif', fontWeight: 700 }}>
-  Ple<span style={{ color: '#FFC107' }}>x</span>
-</Typography>
-
-
+            <Typography variant="h6" sx={{ ml: 2, fontFamily: 'Comfortaa, sans-serif', fontWeight: 700 }}>
+              Ple<span style={{ color: '#FFC107' }}>x</span>
+            </Typography>
           </Box>
 
           {/* Center Section */}
-          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1, justifyContent: 'center' }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' ,mx:3,'&:hover': {
-      color: '#FBBC04', 
-    },}}>
+              <Button key={item} sx={{ color: '#fff', mx: 3, '&:hover': { color: '#FBBC04' } }}>
                 {item}
               </Button>
             ))}
           </Box>
 
-          {/* Right Section: Sign In and Sign Up */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Button sx={{ color: '#fff' ,mr:3,'&:hover': {
-      color: '#FBBC04', 
-    },}}>Sign In</Button>
-            <Button sx={{ color: '#fff' ,'&:hover': {
-      color: '#FBBC04', 
-    },}}>Sign Up</Button>
+          {/* Right Section */}
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
+            <Button sx={{ color: '#fff', mr: 3, '&:hover': { color: '#FBBC04' } }}>Sign In</Button>
+            <Button sx={{ color: '#fff', '&:hover': { color: '#FBBC04' } }}>Sign Up</Button>
+          </Box>
+
+          {/* Mobile View: Hamburger and Drawer */}
+          <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              edge="start"
+              sx={{
+                ml: 2,
+                fontSize: '2rem',
+                '&:hover': {
+                  color: '#FBBC04', 
+                },
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
@@ -120,6 +142,7 @@ function HomeNavbar(props) {
           {drawer}
         </Drawer>
       </nav>
+
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>

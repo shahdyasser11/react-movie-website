@@ -98,7 +98,7 @@ const HomeImage = () => {
             },
           }}
         >
-          Watch Free
+          Watch Now
         </Button>
       </Box>
     </Box>

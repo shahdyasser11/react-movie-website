@@ -30,7 +30,7 @@ const Footer = () => {
         </Grid>
 
         {/* Company Section */}
-        <Grid item xs={12} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <Grid item xs={4} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
             Company
           </Typography>
@@ -165,7 +165,7 @@ const Footer = () => {
         </Grid>
 
         {/* Plex Pass Section */}
-        <Grid item xs={12} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <Grid item xs={4} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
             Plex Pass
           </Typography>
@@ -228,7 +228,7 @@ const Footer = () => {
         </Grid>
 
         {/* Downloads Section */}
-        <Grid item xs={12} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <Grid item xs={4} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
             Downloads
           </Typography>
@@ -319,7 +319,7 @@ const Footer = () => {
         </Grid>
 
         {/* Support Section */}
-        <Grid item xs={12} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <Grid item xs={6} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
             Support
           </Typography>
@@ -452,7 +452,7 @@ const Footer = () => {
         </Grid>
 
         {/* Watch Free Section */}
-        <Grid item xs={12} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <Grid item xs={6} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
             Watch Free
           </Typography>
