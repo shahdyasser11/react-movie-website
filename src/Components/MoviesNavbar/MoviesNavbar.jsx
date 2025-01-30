@@ -20,11 +20,9 @@ import { useNavigate } from 'react-router-dom';
 const drawerWidth = 240;
 const navItems = [
   { page: 'Home', route: '/' },
-  { page: 'About', route: '/About' },
-  { page: 'Contact', route: '../Footer' },
 ];
 
-function HomeNavbar(props) {
+function MoviesNavbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -204,7 +202,7 @@ function HomeNavbar(props) {
   );
 }
 
-HomeNavbar.propTypes = {
+MoviesNavbar.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -212,4 +210,4 @@ HomeNavbar.propTypes = {
   window: PropTypes.func,
 };
 
-export default HomeNavbar;
+export default MoviesNavbar;

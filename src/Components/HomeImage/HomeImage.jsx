@@ -1,8 +1,15 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import backgroundImage from '../../imgs/backgroundImage.jpg';
+import { useNavigate } from 'react-router-dom';
+
 
 const HomeImage = () => {
+  const navigate = useNavigate();
+  const navigateToMovies = (pageRoute) => {
+    // setMobileOpen(false);
+    navigate(pageRoute);
+  };
   return (
     <Box
       sx={{
@@ -47,12 +54,7 @@ const HomeImage = () => {
         }}
       >
         <Typography
-          variant="h2"
-          sx={{
-            fontWeight: 700,
-            mb: 2,
-            lineHeight: 1.2,
-            fontSize: {
+          variant="h2"sx={{fontWeight: 700,mb: 2,lineHeight: 1.2,fontSize: {
               xs: '1.5rem',
               sm: '2.5rem',
               md: '3rem',
@@ -78,7 +80,7 @@ const HomeImage = () => {
         >
           The search is over! Let Plex help you find the perfect
           <br />
-          movie to watch tonight for free.
+          movie to watch tonight.
         </Typography>
         <Button
           variant="contained"
@@ -97,6 +99,7 @@ const HomeImage = () => {
               backgroundColor: '#FFB300', 
             },
           }}
+          onClick={() => navigateToMovies('/Movies')} 
         >
           Watch Now
         </Button>

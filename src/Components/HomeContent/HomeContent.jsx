@@ -38,11 +38,10 @@ const HomeContent = () => {
         justifyContent="center"
         alignItems="center"
         sx={{
-          // Ensure the container is centered on all screen sizes
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },  // Stack vertically on xs screens
-          justifyContent: { xs: 'center', sm: 'space-between' },  // Center on xs, space on larger screens
-          alignItems: 'center', // Keep cards centered vertically on all screen sizes
+          flexDirection: { xs: 'column', sm: 'row' }, 
+          justifyContent: { xs: 'center', sm: 'space-between' },  
+          alignItems: 'center', 
         }}
       >
         {/* Card 1 */}
@@ -198,7 +197,7 @@ const HomeContent = () => {
         justifyContent: 'center',
         alignItems: 'center',
         height: 'auto',
-        padding: { xs: '4rem', sm: '6rem', md: '8rem' },  // Adjust padding for responsiveness
+        padding: { xs: '4rem', sm: '6rem', md: '8rem' },  
         background: 'white',
       }}
     >
@@ -207,8 +206,7 @@ const HomeContent = () => {
         spacing={4} 
         alignItems="center"
         sx={{
-          // Stack vertically for screens smaller than 981px (use xs or sm breakpoint)
-          flexDirection: { xs: 'column', sm: 'column', md: 'row' },  // 'row' for screens >= 981px
+          flexDirection: { xs: 'column', sm: 'column', md: 'row' },  
         }}
       >
         {/* Circle with Image */}
@@ -216,8 +214,8 @@ const HomeContent = () => {
           <Box
             sx={{
               position: 'relative',
-              width: '20rem',  // Adjust width for responsiveness
-              height: '20rem', // Adjust height for responsiveness
+              width: '20rem', 
+              height: '20rem', 
               borderRadius: '50%',
               background: 'linear-gradient(to right, rgb(201, 12, 201), rgb(68, 43, 227))',
               backgroundSize: 'cover',
@@ -253,7 +251,7 @@ const HomeContent = () => {
               gutterBottom
               sx={{
                 color: 'black',
-                fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },  // Adjust font size for responsiveness
+                fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
               }}
             >
               It has never been easier to watch free movies online.
@@ -262,7 +260,7 @@ const HomeContent = () => {
               variant="body1"
               color="text.secondary"
               sx={{
-                fontSize: { xs: '0.9rem', sm: '1rem', md: '1.2rem' }, // Adjust font size for responsiveness
+                fontSize: { xs: '0.9rem', sm: '1rem', md: '1.2rem' }, 
                 textAlign: { xs: 'center', sm: 'center', md: 'left' },
               }}
             >

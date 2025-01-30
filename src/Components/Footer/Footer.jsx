@@ -6,8 +6,12 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import GestureIcon from '@mui/icons-material/Gesture';
 import EditAttributesIcon from '@mui/icons-material/EditAttributes';
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navToExternal = (url) => {
+    window.open(url, '_blank');
+  };
   return (
     <Box
       sx={{
@@ -651,6 +655,7 @@ const Footer = () => {
           color: "#A35C7A",
         },
       }}
+      onClick={()=>{navToExternal('https://www.instagram.com/plex.tv/')}}
     >
       <InstagramIcon />
     </IconButton>
@@ -665,6 +670,8 @@ const Footer = () => {
           color: "#344CB7",
         },
       }}
+      onClick={()=>{navToExternal('https://web.facebook.com/plexapp?_rdc=1&_rdr#')}}
+
     >
       <FacebookIcon />
     </IconButton>
@@ -679,6 +686,8 @@ const Footer = () => {
           color: "#DEAA79",
         },
       }}
+      onClick={()=>{navToExternal('https://bsky.app/profile/plextv.bsky.social')}}
+
     >
       <GestureIcon />
     </IconButton>
@@ -693,6 +702,7 @@ const Footer = () => {
           color: "#F93827",
         },
       }}
+      onClick={()=>{navToExternal('https://www.youtube.com/user/plextvapp')}}
     >
       <YouTubeIcon />
     </IconButton>
@@ -707,6 +717,8 @@ const Footer = () => {
           color: "#16C47F",
         },
       }}
+      onClick={()=>{navToExternal('https://www.linkedin.com/company/plex-inc/')}}
+
     >
       <EditAttributesIcon />
     </IconButton>
