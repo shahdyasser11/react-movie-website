@@ -16,20 +16,25 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+
+
 
 const drawerWidth = 240;
-const navItems = [
-  { page: 'Home', route: '/' },
-];
+const navItems = [{ page: 'Home', route: '/' }];
 
-function MoviesNavbar(props) {
-  const { window } = props;
+function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies,handleSelectedMovie }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
   const handlePageNavigation = (pageRoute) => {
     setMobileOpen(false);
     navigate(pageRoute);
@@ -42,17 +47,13 @@ function MoviesNavbar(props) {
       </Typography>
       <Divider />
       <List>
-      {navItems.map((item) => (
-  <ListItem key={item.page} disablePadding>
-    <ListItemButton
-      sx={{ textAlign: 'center' }}
-      onClick={() => handlePageNavigation(item.route)} 
-    >
-      <ListItemText primary={item.page} />
-    </ListItemButton>
-  </ListItem>
-))}
-
+        {navItems.map((item) => (
+          <ListItem key={item.page} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handlePageNavigation(item.route)}>
+              <ListItemText primary={item.page} />
+            </ListItemButton>
+          </ListItem>
+        ))}
         <Divider />
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: 'center' }}>
@@ -68,106 +69,108 @@ function MoviesNavbar(props) {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
+  const uniqueMovies = new Map(); // Store unique movies using a Map (prevents duplicate ids)
+
+[...allMovies, ...topRatedMovies, ...upcomingMovies].forEach(movie => {
+  if (!uniqueMovies.has(movie.id)) {
+    uniqueMovies.set(movie.id, { label: movie.original_title, id: movie.id, movieData: movie });
+  }
+});
+
+const movieOptions = Array.from(uniqueMovies.values()); 
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        component="nav"
-        sx={{
-          backgroundColor: '#1A1A1D',
-          color: '#fff',
-        }}
-      >
+      <AppBar component="nav" sx={{ backgroundColor: '#1A1A1D', color: '#fff' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {/* Left Section */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton
-              color="inherit"
-              aria-label="slideshow"
-              sx={{
-                ml: 2,
-                fontSize: '5rem',
-                '&:hover': {
-                  color: '#FBBC04',
-                },
-              }}
-            >
-              <SlideshowIcon />
-            </IconButton>
+          <Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+            {/* Left Section: Logo and Search Box */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <IconButton color="inherit" aria-label="slideshow" sx={{ fontSize: '5rem', '&:hover': { color: '#FBBC04' } }}>
+                <SlideshowIcon />
+              </IconButton>
+              <Typography variant="h6" sx={{ fontFamily: 'Comfortaa, sans-serif', fontWeight: 700 }}>
+                Ple<span style={{ color: '#FFC107' }}>x</span>
+              </Typography>
 
-            <Typography
-              variant="h6"
-              sx={{
-                ml: 2,
-                fontFamily: 'Comfortaa, sans-serif',
-                fontWeight: 700,
-              }}
-            >
-              Ple<span style={{ color: '#FFC107' }}>x</span>
-            </Typography>
-          </Box>
+              {/* Search Box */}
+              <Autocomplete
+      disablePortal
+      options={movieOptions}
+      getOptionLabel={(option) => option.label}
+      onChange={(event, value) => {
+        if (handleSelectedMovie) {
+          handleSelectedMovie(value ? value.movieData : null); 
+        }
+      }}
+      sx={{
+        width: 200,
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '15px',
+          height: '30px',
+          '& fieldset': {
+            borderColor: 'white',
+          },
+          '&:hover fieldset': {
+            borderColor: '#FFC107',
+          },
+        },
+        '& .MuiInputLabel-root': {
+          color: 'white',
+          top: '-12px',
+        },
+        '& .MuiInputBase-root': {
+          height: '30px',
+          color: 'white',
+        },
+        '& .MuiInputBase-input': {
+          color: 'white',
+        },
+        '& .MuiSvgIcon-root': {
+          color: 'white',
+        },
+      }}
+      renderInput={(params) => <TextField {...params} label="Search" />}
+    />
 
-          {/* Center Section */}
-          <Box
-            sx={{
-              display: { xs: 'none', sm: 'flex' },
-              flexGrow: 1,
-              justifyContent: 'center',
-            }}
-          >
-            {navItems.map((item) => (
-              <Button
-                key={item.page}
-                sx={{
-                  color: '#fff',
-                  mx: 3,
-                  '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-                }}
-              >
-                {item.page}
-              </Button>
-            ))}
+              {selectedMovie && (
+               handleSelectedMovie(selectedMovie)
+              )}
+            </Box>
+
+            {/* Center Section: "Home" button in the center */}
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
+              {navItems.map((item) => (
+                <Button
+                  key={item.page}
+                  sx={{
+                    color: '#fff',
+                    mx: 3,
+                    '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
+                  }}
+                  onClick={() => handlePageNavigation(item.route)}
+                >
+                  {item.page}
+                </Button>
+              ))}
+            </Box>
           </Box>
 
           {/* Right Section */}
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-            <Button
-              sx={{
-                color: '#fff',
-                mr: 3,
-                '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-              }}
-            >
+            <Button sx={{ color: '#fff', mr: 3, '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' } }}>
               Sign In
             </Button>
-            <Button
-              sx={{
-                color: '#fff',
-                '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-              }}
-            >
+            <Button sx={{ color: '#fff', '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' } }}>
               Sign Up
             </Button>
           </Box>
 
           {/* Mobile View: Hamburger and Drawer */}
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-              edge="start"
-              sx={{
-                ml: 2,
-                fontSize: '2rem',
-                '&:hover': {
-                  color: '#FBBC04',
-                },
-              }}
-            >
+            <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle} edge="start" sx={{ ml: 2, fontSize: '2rem', '&:hover': { color: '#FBBC04' } }}>
               <MenuIcon />
             </IconButton>
           </Box>
@@ -181,7 +184,7 @@ function MoviesNavbar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -203,11 +206,8 @@ function MoviesNavbar(props) {
 }
 
 MoviesNavbar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
+  // AllMovies: PropTypes.array.isRequired,
 };
 
 export default MoviesNavbar;

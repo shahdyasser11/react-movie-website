@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomeLayout from './Components/HomeLayout/HomeLayout';
 import HomeImage from './Components/HomeImage/HomeImage';
 import MoviesLayout from './Components/MoviesLayout/MoviesLayout';
+import MovieDetails from './Components/Movies/MovieDetails';
 // http://localhost:5173/
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
         <Route index element={<HomeImage />} /> 
       </Route>
       <Route path="/Movies" element={<MoviesLayout />} />
-    </Routes>
+      <Route path="/movie-details" element={<MovieDetails />} />
+      </Routes>
   );
 }
 

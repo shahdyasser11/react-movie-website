@@ -4,7 +4,6 @@ import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import HomeImage from '../HomeImage/HomeImage';
 import Footer from '../Footer/Footer';
 import HomeContent from '../HomeContent/HomeContent';
-
 const HomeLayout = () => {
   return (
     <>
@@ -23,6 +22,7 @@ const HomeLayout = () => {
         <Box sx={{ flexGrow: 1 }}>
           <HomeContent />
         </Box>
+
 
         {/* Footer Section */}
         <Box sx={{ height: '80px' }}>
