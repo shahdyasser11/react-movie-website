@@ -7,21 +7,21 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
-import { Modal, Box, TextField, Grid } from '@mui/material';
+import { Modal, Box, TextField, Grid, Skeleton } from '@mui/material';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
-export default function MoviesCard({ movie }) {
+export default function MoviesCard({ movie,connected }) {
 
   const [copyText, setCopyText] = useState("Copy");
   const [open, setOpen] = React.useState(false);
   const [openDetails, setOpenDetails] = React.useState(false);
- const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleOpenDetails = () => setOpen(true);
-  const handleCloseDetails = () => setOpen(false);
+  const handleOpenDetails = () => setOpenDetails(true);
+  const handleCloseDetails = () => setOpenDetails(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(movie.title);
@@ -64,7 +64,8 @@ export default function MoviesCard({ movie }) {
         },
       }}
     >
-      <CardMedia
+
+<CardMedia
         sx={{
           height: '15rem',
           width: '100%',
@@ -138,7 +139,7 @@ export default function MoviesCard({ movie }) {
       </Modal>
      
      {/* details modal */}
-     <Modal open={open} onClose={handleCloseDetails} aria-labelledby="modal-title" aria-describedby="modal-description">
+     <Modal open={openDetails} onClose={handleCloseDetails} aria-labelledby="modal-title" aria-describedby="modal-description">
      <Box
         sx={{
           position: 'absolute',
@@ -190,6 +191,9 @@ export default function MoviesCard({ movie }) {
         </Box>
       </Box>
       </Modal>
+
+      
+      
 
     </Card>
   );

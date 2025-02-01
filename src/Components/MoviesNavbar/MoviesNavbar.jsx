@@ -70,7 +70,7 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies,handle
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const uniqueMovies = new Map(); // Store unique movies using a Map (prevents duplicate ids)
+  const uniqueMovies = new Map(); 
 
 [...allMovies, ...topRatedMovies, ...upcomingMovies].forEach(movie => {
   if (!uniqueMovies.has(movie.id)) {
@@ -140,7 +140,7 @@ const movieOptions = Array.from(uniqueMovies.values());
               )}
             </Box>
 
-            {/* Center Section: "Home" button in the center */}
+            {/* Center Section */}
             <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
               {navItems.map((item) => (
                 <Button
@@ -168,7 +168,7 @@ const movieOptions = Array.from(uniqueMovies.values());
             </Button>
           </Box>
 
-          {/* Mobile View: Hamburger and Drawer */}
+          {/*  Drawer */}
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
             <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle} edge="start" sx={{ ml: 2, fontSize: '2rem', '&:hover': { color: '#FBBC04' } }}>
               <MenuIcon />

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MoviesCard from '../MoviesCards/MoviesCards';
-import { Grid, Stack, Typography, Button, Box } from '@mui/material';
+import { Grid, Stack, Typography, Button, Box, CardContent, CardActions, Card } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Skeleton from '@mui/material/Skeleton';
 
 const AllMovies = ({ handleAllMovies }) => {
   const [allMovies, setMovies] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [connected, setConnection] = useState(false);
 
   // Get all movies
   const getMovies = async (url) => {
@@ -21,8 +23,10 @@ const AllMovies = ({ handleAllMovies }) => {
       });
 
       setMovies(res.data.results);
-      handleAllMovies(res.data.results); 
+      handleAllMovies(res.data.results);
+      setConnection(true);
     } catch (error) {
+      setConnection(false); 
       console.error('Error fetching movies:', error);
     }
   };
@@ -59,9 +63,26 @@ const AllMovies = ({ handleAllMovies }) => {
           px: 2,
         }}
       >
-        {visibleMovies.map((movie) => (
-          <MoviesCard key={movie.id} movie={movie} />
-        ))}
+        {!connected ? (
+  // Show skeleton when not connected
+  [...Array(8)].map((_, index) => (
+    <Card key={index} sx={{ width: '20rem', height: '25rem', marginBottom: '2rem' }}>
+      <Skeleton variant="rectangular" width="100%" height="15rem" />
+      <CardContent>
+        <Skeleton width="80%" height={30} />
+        <Skeleton width="60%" height={20} />
+      </CardContent>
+      <CardActions>
+        <Skeleton width="30%" height={30} />
+        <Skeleton width="30%" height={30} />
+      </CardActions>
+    </Card>
+  ))
+) : (
+  // Show movies when connected
+  visibleMovies.map((movie) => <MoviesCard key={movie.id} movie={movie} />)
+)}
+
       </Grid>
 
       {allMovies.length > 8 && (

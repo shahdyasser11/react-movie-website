@@ -155,7 +155,7 @@ function HomeNavbar(props) {
             </Button>
           </Box>
 
-          {/* Mobile View: Hamburger and Drawer */}
+          {/* Drawer */}
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
             <IconButton
               color="inherit"

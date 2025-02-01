@@ -12,7 +12,6 @@ function App() {
         <Route index element={<HomeImage />} /> 
       </Route>
       <Route path="/Movies" element={<MoviesLayout />} />
-      <Route path="/movie-details" element={<MovieDetails />} />
       </Routes>
   );
 }

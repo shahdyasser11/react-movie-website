@@ -11,7 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: 'white',  // Set text color to white
+    color: 'white', 
     backgroundColor: 'transparent',
     borderColor: 'transparent',
 }));

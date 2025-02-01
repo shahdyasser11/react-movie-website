@@ -294,46 +294,48 @@ const HomeContent = () => {
     </Box>
 
             {/* partnership box */}
-            <Box sx={{ padding: 4, backgroundColor: "#F5F5F5" }}>
-                <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: "600" }}>
-                    Proud Partners with:
-                </Typography>
+            <Box sx={{ padding: 4, backgroundColor: "#F5F5F5", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}> 
+        <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: "600" }}>
+            Proud Partners with:
+        </Typography>
+    </Box>
 
-                <Grid container spacing={1}>
-                    {/* Partners grids */}
-                    <Grid item xs={12}>
-                        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-                            {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
-                                <Grid key={index} item>
-                                    <Paper
-                                        sx={{
-                                            height: 100,
-                                            width: 120,
-                                            backgroundColor: '#fff',
-                                            boxShadow: 2,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}
-                                    >
-                                        <img
-                                            src={imageSrc}
-                                            alt={`photo${index + 1}`}
-                                            style={{
-                                                width: '70%',
-                                                height: '70%',
-                                                objectFit: 'cover',
-                                                borderRadius: '8px',
-                                            }}
-                                        />
-                                    </Paper>
-                                </Grid>
-                            ))}
-                        </Grid>
+    <Grid container spacing={1} justifyContent="center">
+        {/* Partners grids */}
+        <Grid item xs={12}>
+            <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
+                    <Grid key={index} item>
+                        <Paper
+                            sx={{
+                                height: 100,
+                                width: 120,
+                                backgroundColor: '#fff',
+                                boxShadow: 2,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <img
+                                src={imageSrc}
+                                alt={`photo${index + 1}`}
+                                style={{
+                                    width: '70%',
+                                    height: '70%',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px',
+                                }}
+                            />
+                        </Paper>
                     </Grid>
-                </Grid>
+                ))}
+            </Grid>
+        </Grid>
+    </Grid>
+</Box>
 
-            </Box>
 
         </div>
     );

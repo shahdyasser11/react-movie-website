@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCards/MoviesCards';
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -11,6 +11,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 export const UpcomingMovies = ({handleUpcomingMovies}) => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [showAll,setShowAll]=useState(false);
+  const [connected, setConnection] = useState(false);
+  
 
   const getUpcomingMovies = async (url) => {
     try {
@@ -26,7 +28,9 @@ export const UpcomingMovies = ({handleUpcomingMovies}) => {
 
       console.log(res.data.results);
       setUpcomingMovies(res.data.results); 
-      handleUpcomingMovies(res.data.results)
+      handleUpcomingMovies(res.data.results);
+      setConnection(true);
+
     } catch (error) {
       console.error('Error fetching upcoming movies:', error);
     }
@@ -77,9 +81,25 @@ export const UpcomingMovies = ({handleUpcomingMovies}) => {
           px:2,
         }}
       >
-        {visibleMovies.map((movie) => (
-          <MoviesCard key={movie.id} movie={movie} />
-        ))}
+                      {!connected ? (
+  // Show skeleton when not connected
+  [...Array(8)].map((_, index) => (
+    <Card key={index} sx={{ width: '20rem', height: '25rem', marginBottom: '2rem' }}>
+      <Skeleton variant="rectangular" width="100%" height="15rem" />
+      <CardContent>
+        <Skeleton width="80%" height={30} />
+        <Skeleton width="60%" height={20} />
+      </CardContent>
+      <CardActions>
+        <Skeleton width="30%" height={30} />
+        <Skeleton width="30%" height={30} />
+      </CardActions>
+    </Card>
+  ))
+) : (
+  // Show movies when connected
+  visibleMovies.map((movie) => <MoviesCard key={movie.id} movie={movie} />)
+)}
       </Grid>
       {/* See More and See Less Button */}
       
