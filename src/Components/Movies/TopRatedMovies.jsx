@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCards/MoviesCards';
 import { Button, Card, CardActions, CardContent, Grid, Skeleton, Stack, Typography } from '@mui/material';
@@ -6,45 +5,46 @@ import Box from '@mui/material/Box';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useOutletContext } from 'react-router-dom';
 
 
-export const TopRatedMovies = ({ handleTopRatedMovies }) => {
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
+export const TopRatedMovies = () => {
+  const { topRatedMovies } = useOutletContext();
   const [showAll, setShowAll] = useState(false); 
-  const [connected, setConnection] = useState(false);
+  const {connected}= useOutletContext();
 
-  const getTopRatedMovies = async (url) => {
-    try {
-      const res = await axios.get(
-        url, 
-        {
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94'
-          }
-        }
-      );
+  // const getTopRatedMovies = async (url) => {
+  //   try {
+  //     const res = await axios.get(
+  //       url, 
+  //       {
+  //         headers: {
+  //           accept: 'application/json',
+  //           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94'
+  //         }
+  //       }
+  //     );
 
-      console.log(res.data.results);
-      setTopRatedMovies(res.data.results); 
-      handleTopRatedMovies(res.data.results);
-      setConnection(true);
+  //     // console.log(res.data.results);
+  //     setTopRatedMovies(res.data.results); 
+  //     handleTopRatedMovies(res.data.results);
+  //     setConnection(true);
 
-    } catch (error) {
-      setConnection(false);
-      console.error('Error fetching top rated movies:', error);
-    }
-  };
+  //   } catch (error) {
+  //     setConnection(false);
+  //     console.error('Error fetching top rated movies:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getTopRatedMovies('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1');
-  }, []);
+  // useEffect(() => {
+  //   getTopRatedMovies('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1');
+  // }, []);
   let visibleMovies;
   if(showAll){
     visibleMovies=topRatedMovies;
   }
   else{
-    visibleMovies=topRatedMovies.slice(0,8);
+    visibleMovies=topRatedMovies.topRatedMovies.slice(0,8);
   }
 
   return (

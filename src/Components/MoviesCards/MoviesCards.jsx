@@ -12,7 +12,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
-export default function MoviesCard({ movie,connected }) {
+export default function MoviesCard({ movie }) {
 
   const [copyText, setCopyText] = useState("Copy");
   const [open, setOpen] = React.useState(false);
@@ -70,6 +70,7 @@ export default function MoviesCard({ movie,connected }) {
           height: '15rem',
           width: '100%',
           objectFit: 'cover',
+          // objectPosition:'top',
           flexShrink: 0,
         }}
         image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

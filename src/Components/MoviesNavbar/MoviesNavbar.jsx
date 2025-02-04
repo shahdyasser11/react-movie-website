@@ -25,10 +25,14 @@ import { useState } from 'react';
 const drawerWidth = 240;
 const navItems = [{ page: 'Home', route: '/' }];
 
-function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies,handleSelectedMovie }) {
+function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handleSelectedMovie }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
   const [selectedMovie, setSelectedMovie] = useState(null);
+  localStorage.setItem('allMovies', JSON.stringify(allMovies));
+  localStorage.setItem('topRatedMovies', JSON.stringify(topRatedMovies));
+  localStorage.setItem('handleSelectedMovie', JSON.stringify(handleSelectedMovie));
+
 
 
   const handleDrawerToggle = () => {
@@ -70,15 +74,15 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies,handle
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const uniqueMovies = new Map(); 
+  const uniqueMovies = new Map();
 
-[...allMovies, ...topRatedMovies, ...upcomingMovies].forEach(movie => {
-  if (!uniqueMovies.has(movie.id)) {
-    uniqueMovies.set(movie.id, { label: movie.original_title, id: movie.id, movieData: movie });
-  }
-});
+  [...allMovies, ...topRatedMovies, ...upcomingMovies].forEach(movie => {
+    if (!uniqueMovies.has(movie.id)) {
+      uniqueMovies.set(movie.id, { label: movie.original_title, id: movie.id, movieData: movie });
+    }
+  });
 
-const movieOptions = Array.from(uniqueMovies.values()); 
+  const movieOptions = Array.from(uniqueMovies.values());
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -102,8 +106,17 @@ const movieOptions = Array.from(uniqueMovies.values());
       getOptionLabel={(option) => option.label}
       onChange={(event, value) => {
         if (handleSelectedMovie) {
-          handleSelectedMovie(value ? value.movieData : null); 
-        }
+          if(value){
+            handleSelectedMovie(value.movieData);
+                        navigate(`/Movies/${value.movieData.id}`);
+
+          }
+          else{
+            navigate(`/Movies`);
+
+          }
+          }
+        
       }}
       sx={{
         width: 200,
@@ -136,7 +149,7 @@ const movieOptions = Array.from(uniqueMovies.values());
     />
 
               {selectedMovie && (
-               handleSelectedMovie(selectedMovie)
+                handleSelectedMovie(selectedMovie)
               )}
             </Box>
 

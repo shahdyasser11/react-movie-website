@@ -1,29 +1,69 @@
-import React from 'react';
+import { useOutletContext, useParams } from 'react-router-dom';
 import MoviesCard from '../MoviesCards/MoviesCards';
+import { Grid } from '@mui/material';
 
-const SelectedCategory = ({ selectedCategory, allMovies, upcomingMovies,topRatedMovies }) => {
-    const filteredAllMovies = allMovies.filter(movie => 
-    movie.genre_ids.includes(selectedCategory)
+
+const SelectedCategory = () => {
+  const { categoryId } = useParams();
+  const { allMovies, upcomingMovies, topRatedMovies } = useOutletContext();
+
+
+
+  const filteredAllMovies = allMovies.allMovies.filter(movie => 
+    movie.genre_ids.includes(parseInt(categoryId))
   );
-  const filteredUpcomingMovies=upcomingMovies.filter(movie=>movie.genre_ids.includes(selectedCategory));
-  const filteredTopRatedMovies=topRatedMovies.filter(movie=>movie.genre_ids.includes(selectedCategory));
-  const uniqueMovies = new Map(); 
-
-  [...filteredUpcomingMovies, ...filteredTopRatedMovies, ...uniqueMovies].forEach(movie => {
-    if (!uniqueMovies.has(movie.id)) {
-      uniqueMovies.set(movie.id, { label: movie.original_title, id: movie.id, movieData: movie });
-    }
-  });
-
-  return (
-    <div>
-      {uniqueMovies.length > 0 ? (
-        uniqueMovies.map(movie => <MoviesCard key={movie.id} movie={movie} />)
-      ) : (
-        <p>No movies found in this category.</p>
-      )}
-    </div>
+  const filteredUpcomingMovies = upcomingMovies.upcomingMovies.filter(movie => 
+    movie.genre_ids.includes(parseInt(categoryId))
   );
+  const filteredTopRatedMovies = topRatedMovies.topRatedMovies.filter(movie => 
+    movie.genre_ids.includes(parseInt(categoryId))
+  );
+
+  if (!Array.isArray(filteredAllMovies) || !Array.isArray(filteredUpcomingMovies) || !Array.isArray(filteredTopRatedMovies)) {
+    return <p>Invalid movie data.</p>;
+  }
+
+
+  const allFilteredMovies = [...filteredUpcomingMovies, ...filteredTopRatedMovies, ...filteredAllMovies];
+const uniqueMovies = [];
+
+for (let i = 0; i < allFilteredMovies.length; i++) {
+  if (!uniqueMovies.some(movie => movie.id === allFilteredMovies[i].id)) {
+    uniqueMovies.push(allFilteredMovies[i]);
+  }
+}
+
+ 
+  console.log(uniqueMovies);
+return (
+  <div>
+    {uniqueMovies.length > 0 ? (
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: { xs: 'center', sm: 'space-between' },
+          alignItems: 'center',
+          px: 2,
+        }}
+      >
+        {uniqueMovies.map(movie => (
+          <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+            <MoviesCard movie={movie} />
+          </Grid>
+        ))}
+      </Grid>
+    ) : (
+      <p>No movies found in this category.</p>
+    )}
+  </div>
+);
+
+
 };
+
 
 export default SelectedCategory;

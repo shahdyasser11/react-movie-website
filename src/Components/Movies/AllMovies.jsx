@@ -1,41 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import MoviesCard from '../MoviesCards/MoviesCards';
 import { Grid, Stack, Typography, Button, Box, CardContent, CardActions, Card } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Skeleton from '@mui/material/Skeleton';
+import { useOutletContext } from 'react-router-dom';
 
-const AllMovies = ({ handleAllMovies }) => {
-  const [allMovies, setMovies] = useState([]);
+
+const AllMovies = () => {
+  // const { handleAllMovies } = useOutletContext(); 
+  // const [allMovies, setMovies] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const [connected, setConnection] = useState(false);
+  const { allMovies } = useOutletContext();
+  const { connected } = useOutletContext();
+
+
+  // const [connected, setConnection] = useState(false);
 
   // Get all movies
-  const getMovies = async (url) => {
-    try {
-      const res = await axios.get(url, {
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94', 
-        },
-      });
+  // const getMovies = async (url) => {
+  //   try {
+  //     const res = await axios.get(url, {
+  //       headers: {
+  //         accept: 'application/json',
+  //         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94', 
+  //       },
+  //     });
 
-      setMovies(res.data.results);
-      handleAllMovies(res.data.results);
-      setConnection(true);
-    } catch (error) {
-      setConnection(false); 
-      console.error('Error fetching movies:', error);
-    }
-  };
+  //     setMovies(res.data.results);
+  //     handleAllMovies(res.data.results);
+  //     setConnection(true);
+  //   } catch (error) {
+  //     setConnection(false); 
+  //     console.error('Error fetching movies:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getMovies('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1');
-  }, []);
+  // useEffect(() => {
+  //   getMovies('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1');
+  // }, []);
 
-  let visibleMovies = showAll ? allMovies : allMovies.slice(0, 8);
+  let visibleMovies = showAll ? allMovies : allMovies.allMovies.slice(0, 8);
 
   return (
     <Stack spacing={3} sx={{ p: 2 }}>

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCards/MoviesCards';
 import { Button, Card, CardActions, CardContent, Grid, Skeleton, Stack, Typography } from '@mui/material';
@@ -6,46 +5,48 @@ import Box from '@mui/material/Box';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useOutletContext } from 'react-router-dom';
 
 
-export const UpcomingMovies = ({handleUpcomingMovies}) => {
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+export const UpcomingMovies = () => {
+  const { upcomingMovies } = useOutletContext();
   const [showAll,setShowAll]=useState(false);
-  const [connected, setConnection] = useState(false);
+  const {connected}= useOutletContext();
+  
   
 
-  const getUpcomingMovies = async (url) => {
-    try {
-      const res = await axios.get(
-        url, 
-        {
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94'
-          }
-        }
-      );
+  // const getUpcomingMovies = async (url) => {
+  //   try {
+  //     const res = await axios.get(
+  //       url, 
+  //       {
+  //         headers: {
+  //           accept: 'application/json',
+  //           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94'
+  //         }
+  //       }
+  //     );
 
-      console.log(res.data.results);
-      setUpcomingMovies(res.data.results); 
-      handleUpcomingMovies(res.data.results);
-      setConnection(true);
+  //     // console.log(res.data.results);
+  //     setUpcomingMovies(res.data.results); 
+  //     handleUpcomingMovies(res.data.results);
+  //     setConnection(true);
 
-    } catch (error) {
-      console.error('Error fetching upcoming movies:', error);
-    }
-  };
+  //   } catch (error) {
+  //     console.error('Error fetching upcoming movies:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getUpcomingMovies('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1');
-  }, []);
+  // useEffect(() => {
+  //   getUpcomingMovies('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1');
+  // }, []);
 
   let visibleMovies;
   if(showAll){
     visibleMovies=upcomingMovies;
   }
   else{
-    visibleMovies=upcomingMovies.slice(0,8);
+    visibleMovies=upcomingMovies.upcomingMovies.slice(0,8);
   }
 
   return (

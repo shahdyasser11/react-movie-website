@@ -7,15 +7,16 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useNavigate } from 'react-router-dom';
 
-export default function DrawerSideBar({ handleSelectedCategory }) {
+
+export default function DrawerSideBar({ handleSelectedCategory,handleSelectedItem }) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+
 
   const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
 
@@ -30,6 +31,7 @@ export default function DrawerSideBar({ handleSelectedCategory }) {
       });
 
       setCategories(res.data.genres);
+      // console.log(res.data.genres);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -43,13 +45,18 @@ export default function DrawerSideBar({ handleSelectedCategory }) {
     setOpen(newOpen);
   };
 
+
+  const handleClickItem = (text) => {
+    setTimeout(() => handleSelectedItem(text), 0);
+  };
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+        
       <List>
         {["All Movies", "Top Rated", "Upcoming"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemButton onClick={() => handleClickItem(text)}>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -59,8 +66,14 @@ export default function DrawerSideBar({ handleSelectedCategory }) {
       <List>
         {categories.map((genre, index) => (
           <ListItem key={genre.id} disablePadding>
-            <ListItemButton onClick={() => { handleSelectedCategory(genre.id); toggleDrawer(false) }}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+ <ListItemButton
+              onClick={() => {
+                handleSelectedCategory(genre.id);
+                navigate(`/movies/category/${genre.id}`);
+                toggleDrawer(false);
+              }}
+            >     
+                     {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               <ListItemText primary={genre.name} />
             </ListItemButton>
           </ListItem>
@@ -71,7 +84,7 @@ export default function DrawerSideBar({ handleSelectedCategory }) {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)} sx={{ color: "#FFC107", pt: 7, pl: 3, fontSize: "1rem" }}>
+      <Button onClick={toggleDrawer(true)} sx={{ color: "#FFC107", pt: 7,pb:3, pl: 3, fontSize: "1rem" }}>
         <ArrowBackIosIcon sx={{ color: "white" }} />
         Choose a Category
       </Button>
@@ -80,4 +93,4 @@ export default function DrawerSideBar({ handleSelectedCategory }) {
       </Drawer>
     </div>
   );
-}
+} 

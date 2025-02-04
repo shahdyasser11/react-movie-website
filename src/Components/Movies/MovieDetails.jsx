@@ -1,21 +1,25 @@
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useOutletContext, useParams } from 'react-router-dom';
 import MoviesCard from '../MoviesCards/MoviesCards';
 import { Box } from '@mui/material';
 
-const MovieDetails = ({ selectedMovie }) => {
+const MovieDetails = () => {
+  const { movieId } = useParams();
+  const { selectedMovie} = useOutletContext();
+
   return (
-    <Box 
-      sx={{ 
-        width: '100%', 
-        height: '100%', 
-        display: 'flex', 
-        justifyContent: 'center', 
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
-        p:0,
-        m:0,
+        padding: 0,
+        margin: 0,
       }}
     >
-      <MoviesCard key={selectedMovie.id} movie={selectedMovie} />
+      {<MoviesCard key={movieId} movie={selectedMovie.selectedMovie} />}
     </Box>
   );
 };
