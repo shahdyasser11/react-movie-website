@@ -12,6 +12,8 @@ export const TopRatedMovies = () => {
   const { topRatedMovies } = useOutletContext();
   const [showAll, setShowAll] = useState(false); 
   const {connected}= useOutletContext();
+  const {allCategories}=useOutletContext();
+  
 
   // const getTopRatedMovies = async (url) => {
   //   try {
@@ -41,7 +43,7 @@ export const TopRatedMovies = () => {
   // }, []);
   let visibleMovies;
   if(showAll){
-    visibleMovies=topRatedMovies;
+    visibleMovies=topRatedMovies.topRatedMovies;
   }
   else{
     visibleMovies=topRatedMovies.topRatedMovies.slice(0,8);
@@ -69,39 +71,48 @@ export const TopRatedMovies = () => {
   
       {/* Movies grid */}
       <Grid
-        container
-        spacing={3}
-        justifyContent="center"
-        alignItems="center"
-        sx={{
-          flexDirection: { xs: "column", sm: "row" },
-          justifyContent: { xs: "center", sm: "space-between" },
-          alignItems: "center",
-          px:2,
-        }}
-      >
-                {!connected ? (
-  // Show skeleton when not connected
-  [...Array(8)].map((_, index) => (
-    <Card key={index} sx={{ width: '20rem', height: '25rem', marginBottom: '2rem' }}>
-      <Skeleton variant="rectangular" width="100%" height="15rem" />
-      <CardContent>
-        <Skeleton width="80%" height={30} />
-        <Skeleton width="60%" height={20} />
-      </CardContent>
-      <CardActions>
-        <Skeleton width="30%" height={30} />
-        <Skeleton width="30%" height={30} />
-      </CardActions>
-    </Card>
-  ))
-) : (
-  // Show movies when connected
-  visibleMovies.map((movie) => <MoviesCard key={movie.id} movie={movie} />)
-)}
-      </Grid>
+              container
+              spacing={3}
+              justifyContent="center"
+              alignItems="center"
+              sx={{
+                flexDirection: { xs: 'column', sm: 'row' },
+                justifyContent: { xs: 'center', sm: 'center' },
+                alignItems: 'center',
+                px: 2,
+              }}
+            >
+      
+              
+      {!connected.connected ? (
+        // Show skeleton when not connected
+        [...Array(8)].map((_, index) => (
+          <Card key={index} sx={{ width: '20rem', height: '25rem', marginBottom: '2rem' }}>
+            <Skeleton variant="rectangular" width="100%" height="15rem" />
+            <CardContent>
+              <Skeleton width="80%" height={30} />
+              <Skeleton width="60%" height={20} />
+            </CardContent>
+            <CardActions>
+              <Skeleton width="30%" height={30} />
+              <Skeleton width="30%" height={30} />
+            </CardActions>
+          </Card>
+        ))
+      ) : (
+        // Show movies when connected
+        visibleMovies.map((movie) => (
+          <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+            <MoviesCard movie={movie} allCategories={allCategories} />
+          </Grid>
+        ))
+      )}
+      
+      
+            </Grid>
+            
       {/* See More and See Less Button */}
-      {topRatedMovies.length > 8 ? (
+      {topRatedMovies.topRatedMovies.length > 8 ? (
   <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
     <Button
       variant="contained"

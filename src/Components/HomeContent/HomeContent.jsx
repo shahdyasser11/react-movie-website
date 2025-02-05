@@ -12,8 +12,13 @@ import lionsGate from '../../imgs/lionsgatepng.png'
 import legendary from '../../imgs/legendary.jpg'
 import magnolia from '../../imgs/magnolia.jpg'
 import devicesImage from '../../imgs/pms-devices-image.png'
+import { useNavigate } from 'react-router-dom';
 
 const HomeContent = () => {
+  const navigate = useNavigate();
+  const navigateToMovies = (pageRoute) => {
+    navigate(pageRoute);
+  };
     return (
         <div>
              <Box
@@ -169,6 +174,7 @@ const HomeContent = () => {
                                 backgroundColor: '#FFB300',
                             },
                         }}
+                        onClick={() => navigateToMovies('/Movies')} 
                     >
                         Discover More Now
                     </Button>
@@ -285,6 +291,8 @@ const HomeContent = () => {
                   backgroundColor: '#FFB300',
                 },
               }}
+              onClick={() => navigateToMovies('/Movies')} 
+
             >
               Watch Free
             </Button>

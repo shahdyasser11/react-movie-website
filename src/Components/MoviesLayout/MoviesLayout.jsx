@@ -15,9 +15,8 @@ const MoviesLayout = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [connected, setConnection] = useState(false);
-  const allMoviesRef = useRef(null);
-  const topRatedMoviesRef = useRef(null);
-  const upcomingMoviesRef = useRef(null);
+  const [allCategories, setAllCategories] = useState(null);
+
 
 
 
@@ -39,24 +38,28 @@ const MoviesLayout = () => {
       console.error('Error saving selectedMovie to localStorage:', error);
     }
   };
-  const handleSelectedItem=(item)=>{
-    setSelectedItem(item);
-    scrollToSection(item);  
-    console.log(item);
 
+  const handleAllCategories=(categories)=>{
+setAllCategories(categories);
   }
-  const scrollToSection = (category) => {
-    if (category === "All Movies" && allMoviesRef.current) {
-      allMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    if (category === "Top Rated" && topRatedMoviesRef.current) {
-      topRatedMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      console.log(category);
-    }
-    if (category === "Upcoming" && upcomingMoviesRef.current) {
-      upcomingMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
+  // const handleSelectedItem=(item)=>{
+  //   setSelectedItem(item);
+  //   scrollToSection(item);  
+  //   console.log(item);
+
+  // }
+  // const scrollToSection = (category) => {
+  //   if (category === "All Movies" && allMoviesRef.current) {
+  //     allMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  //   if (category === "Top Rated" && topRatedMoviesRef.current) {
+  //     topRatedMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  //     console.log(category);
+  //   }
+  //   if (category === "Upcoming" && upcomingMoviesRef.current) {
+  //     upcomingMoviesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  // };
   const fetchMovies = async () => {
     const urls = {
       allMovies: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
@@ -102,8 +105,7 @@ const MoviesLayout = () => {
 
   const handleSelectedCategory = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
-  };
-  
+  };  
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -115,11 +117,11 @@ const MoviesLayout = () => {
 
       {/* Drawer Section */}
       <Box sx={{ flexGrow: 1, width: '100%', background: 'linear-gradient(to right, rgb(16, 16, 16), rgb(41, 41, 42))' }}>
-        <DrawerSideBar handleSelectedCategory={handleSelectedCategory} handleSelectedItem={handleSelectedItem} />
+        <DrawerSideBar handleSelectedCategory={handleSelectedCategory} handleAllCategories={handleAllCategories}/>
       </Box>
 
       <Box sx={{ flexGrow: 1, width: '100%', margin: 0, padding: 0 , background: 'linear-gradient(to right, rgb(16, 16, 16), rgb(41, 41, 42))' }}>
-        <Outlet context={{ handleAllMovies, handleTopRatedMovies, handleUpcomingMovies, allMovies:{allMovies} ,topRatedMovies:{topRatedMovies}, upcomingMovies:{upcomingMovies},selectedMovie:{selectedMovie}, connected:{connected} }} />
+        <Outlet context={{ handleAllMovies, handleTopRatedMovies, handleUpcomingMovies, allMovies:{allMovies} ,topRatedMovies:{topRatedMovies}, upcomingMovies:{upcomingMovies},selectedMovie:{selectedMovie}, connected:{connected} , allCategories}} />
       </Box>
      
 
@@ -128,7 +130,7 @@ const MoviesLayout = () => {
       </Box>
 
       {/* Footer Section */}
-      <Box sx={{ height: '80px', width: '100%' }}>
+      <Box sx={{ height: '80px', width: '100%', background: 'black' }}>
         <Footer />
       </Box>
     </Box>

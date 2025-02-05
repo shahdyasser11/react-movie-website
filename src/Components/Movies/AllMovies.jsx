@@ -9,39 +9,10 @@ import { useOutletContext } from 'react-router-dom';
 
 
 const AllMovies = () => {
-  // const { handleAllMovies } = useOutletContext(); 
-  // const [allMovies, setMovies] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const { allMovies } = useOutletContext();
-  const { connected } = useOutletContext();
+  const { allMovies, connected, allCategories } = useOutletContext();
 
-
-  // const [connected, setConnection] = useState(false);
-
-  // Get all movies
-  // const getMovies = async (url) => {
-  //   try {
-  //     const res = await axios.get(url, {
-  //       headers: {
-  //         accept: 'application/json',
-  //         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA3YTcxNTUzMmMxYTk2ODRmZDRjNTYxMDk1Y2NhYSIsIm5iZiI6MTcyNzg2MjY5OS43NTgwMDAxLCJzdWIiOiI2NmZkMTdhYjZjMzY1OTg1YzhmMjNmMDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.aR2TSz0MCOlXSMoLjZClgfD_fcGz_Wf1Sf74gnFcD94', 
-  //       },
-  //     });
-
-  //     setMovies(res.data.results);
-  //     handleAllMovies(res.data.results);
-  //     setConnection(true);
-  //   } catch (error) {
-  //     setConnection(false); 
-  //     console.error('Error fetching movies:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getMovies('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1');
-  // }, []);
-
-  let visibleMovies = showAll ? allMovies : allMovies.allMovies.slice(0, 8);
+  let visibleMovies = showAll ? allMovies.allMovies : allMovies.allMovies.slice(0, 8);
 
   return (
     <Stack spacing={3} sx={{ p: 2 }}>
@@ -64,12 +35,14 @@ const AllMovies = () => {
         alignItems="center"
         sx={{
           flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: { xs: 'center', sm: 'space-between' },
+          justifyContent: { xs: 'center', sm: 'center' },
           alignItems: 'center',
           px: 2,
         }}
       >
-        {!connected ? (
+
+        
+{!connected.connected ? (
   // Show skeleton when not connected
   [...Array(8)].map((_, index) => (
     <Card key={index} sx={{ width: '20rem', height: '25rem', marginBottom: '2rem' }}>
@@ -86,12 +59,17 @@ const AllMovies = () => {
   ))
 ) : (
   // Show movies when connected
-  visibleMovies.map((movie) => <MoviesCard key={movie.id} movie={movie} />)
+  visibleMovies.map((movie) => (
+    <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+      <MoviesCard movie={movie} allCategories={allCategories} />
+    </Grid>
+  ))
 )}
+
 
       </Grid>
 
-      {allMovies.length > 8 && (
+      {allMovies.allMovies.length > 8 && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
           <Button
             variant="contained"

@@ -6,7 +6,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import GestureIcon from '@mui/icons-material/Gesture';
 import EditAttributesIcon from '@mui/icons-material/EditAttributes';
-import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const navToExternal = (url) => {
@@ -15,7 +14,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "FFC107",
+        backgroundColor: "#1A1A1D",
         color: "#fff",
         py: 4,
         px: 2,
@@ -28,7 +27,7 @@ const Footer = () => {
         }}>
         {/* Logo Section */}
         <Grid item xs={12} md={2}>
-          <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: "1rem", fontSize: "2rem" }}>
+          <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: "1rem", fontSize: "2rem",pr:"2rem"}}>
             Ple<span style={{ color: '#FFC107' }}>x</span>
           </Typography>
         </Grid>

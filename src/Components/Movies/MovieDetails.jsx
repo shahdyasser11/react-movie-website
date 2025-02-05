@@ -5,7 +5,8 @@ import { Box } from '@mui/material';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const { selectedMovie} = useOutletContext();
+  const { selectedMovie,allCategories} = useOutletContext();
+
 
   return (
     <Box
@@ -19,7 +20,7 @@ const MovieDetails = () => {
         margin: 0,
       }}
     >
-      {<MoviesCard key={movieId} movie={selectedMovie.selectedMovie} />}
+      {<MoviesCard key={movieId} movie={selectedMovie.selectedMovie} allCategories={allCategories} />}
     </Box>
   );
 };

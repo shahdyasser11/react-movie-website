@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 
 const SelectedCategory = () => {
   const { categoryId } = useParams();
-  const { allMovies, upcomingMovies, topRatedMovies } = useOutletContext();
+  const { allMovies, upcomingMovies, topRatedMovies,allCategories } = useOutletContext();
 
 
 
@@ -45,14 +45,14 @@ return (
         alignItems="center"
         sx={{
           flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: { xs: 'center', sm: 'space-between' },
+          justifyContent: { xs: 'center', sm: 'center' },
           alignItems: 'center',
           px: 2,
         }}
       >
         {uniqueMovies.map(movie => (
           <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-            <MoviesCard movie={movie} />
+            <MoviesCard movie={movie} allCategories={allCategories} />
           </Grid>
         ))}
       </Grid>

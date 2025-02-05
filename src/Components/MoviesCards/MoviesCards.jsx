@@ -7,12 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
-import { Modal, Box, TextField, Grid, Skeleton } from '@mui/material';
+import { Modal, Box, TextField, Grid } from '@mui/material';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
-export default function MoviesCard({ movie }) {
+export default function MoviesCard({ movie,allCategories }) {
 
   const [copyText, setCopyText] = useState("Copy");
   const [open, setOpen] = React.useState(false);
@@ -26,6 +26,10 @@ export default function MoviesCard({ movie }) {
   const handleCopy = () => {
     navigator.clipboard.writeText(movie.title);
     setCopyText("Copied!");
+  
+    setTimeout(() => {
+      setCopyText("Copy");
+    }, 1000);
   };
 
  
@@ -176,11 +180,18 @@ export default function MoviesCard({ movie }) {
             <Typography variant="body2" sx={{ mt: 2 }}>
               {movie.overview} 
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis',pt:2 }}>
           Release Date: {movie.release_date}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          Vote Count {movie.vote_count}
+          Vote Count:  {movie.vote_count}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        Categories:{" "}
+      {movie.genre_ids
+        .map((id) => allCategories.find((cat) => cat.id === id)?.name)
+        .filter(Boolean)
+        .join(", ")}
         </Typography>
           </Grid>
         </Grid>
