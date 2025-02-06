@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,25 +17,106 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import SignUp from '../SignUP/SignUp.jsx';
+import SignIn from '../SignIn/SignIn.jsx';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const drawerWidth = 240;
 const navItems = [
   { page: 'Home', route: '/' },
-  { page: 'About', route: '/About' },
-  { page: 'Contact', route: '../Footer' },
+  { page: 'About', route: '/about' },
+  { page: 'Contact', route: '/contact' },
 ];
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function HomeNavbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const navigate = useNavigate();
+
+  const [signInOpen, setSignInOpen] = useState(false);
+  const [signUpOpen, setSignUpOpen] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return Boolean(localStorage.getItem('authToken'));
+  });
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLoginSuccess = () => {
+    const fakeAuthToken = 'your-auth-token-here';
+    localStorage.setItem('authToken', fakeAuthToken);
+    setIsLoggedIn(true);
+    setSnackbarMessage('Successfully logged in!');
+    setSnackbarSeverity('success');
+    setSnackbarOpen(true);
+  };
+
+  const handleSignupSuccess = () => {
+    const fakeAuthToken = 'your-auth-token-here';
+    localStorage.setItem('authToken', fakeAuthToken);
+    setIsLoggedIn(true);
+    setSnackbarMessage('Successfully registered!');
+    setSnackbarSeverity('success');
+    setSnackbarOpen(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsLoggedIn(false);
+    handleMenuClose();
+    setSnackbarMessage('Successfully logged out!');
+    setSnackbarSeverity('info');
+    setSnackbarOpen(true);
+    navigate('/');
+  };
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
   const handlePageNavigation = (pageRoute) => {
     setMobileOpen(false);
     navigate(pageRoute);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+
+  const handleOpenSignIn = () => {
+    setSignUpOpen(false);
+    setSignInOpen(true);
+  };
+
+  const handleOpenSignUp = () => {
+    setSignInOpen(false);
+    setSignUpOpen(true);
   };
 
   const drawer = (
@@ -44,34 +126,42 @@ function HomeNavbar(props) {
       </Typography>
       <Divider />
       <List>
-      {navItems.map((item) => (
-  <ListItem key={item.page} disablePadding>
-    <ListItemButton
-      sx={{ textAlign: 'center' }}
-      onClick={() => handlePageNavigation(item.route)} 
-    >
-      <ListItemText primary={item.page} />
-    </ListItemButton>
-  </ListItem>
-))}
-
+        {navItems.map((item) => (
+          <ListItem key={item.page} disablePadding>
+            <ListItemButton
+              sx={{ textAlign: 'center' }}
+              onClick={() => handlePageNavigation(item.route)}
+            >
+              <ListItemText primary={item.page} />
+            </ListItemButton>
+          </ListItem>
+        ))}
         <Divider />
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary="Sign In" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary="Sign Up" />
-          </ListItemButton>
-        </ListItem>
+        {!isLoggedIn ? (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <SignIn onLoginSuccess={handleLoginSuccess} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <SignUp onSignupSuccess={handleSignupSuccess} />
+              </ListItemButton>
+            </ListItem>
+          </>
+        ) : (
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogout} sx={{ textAlign: 'center' }}>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -84,7 +174,7 @@ function HomeNavbar(props) {
         }}
       >
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {/* Left Section */}
+
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
               color="inherit"
@@ -112,7 +202,7 @@ function HomeNavbar(props) {
             </Typography>
           </Box>
 
-          {/* Center Section */}
+
           <Box
             sx={{
               display: { xs: 'none', sm: 'flex' },
@@ -128,34 +218,42 @@ function HomeNavbar(props) {
                   mx: 3,
                   '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
                 }}
+                onClick={() => navigate(item.route)}
               >
                 {item.page}
               </Button>
             ))}
           </Box>
 
-          {/* Right Section */}
+
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-            <Button
-              sx={{
-                color: '#fff',
-                mr: 3,
-                '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-              }}
-            >
-              Sign In
-            </Button>
-            <Button
-              sx={{
-                color: '#fff',
-                '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-              }}
-            >
-              Sign Up
-            </Button>
+            {!isLoggedIn ? (
+              <>
+                <SignUp onSignupSuccess={handleSignupSuccess} open={signUpOpen}
+                  onClose={() => setSignUpOpen(false)}
+                  onSwitchAuth={handleOpenSignIn} />
+
+                <SignIn onLoginSuccess={handleLoginSuccess} open={signInOpen}
+                  onClose={() => setSignInOpen(false)}
+                  onSwitchAuth={handleOpenSignUp} />
+              </>
+            ) : (
+              <>
+                <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
+                  <Avatar alt="User Avatar" src="" sx={{ width: 50, height: 50 }} />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </>
+            )}
           </Box>
 
-          {/* Drawer */}
+
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
             <IconButton
               color="inherit"
@@ -176,6 +274,17 @@ function HomeNavbar(props) {
         </Toolbar>
       </AppBar>
 
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={4000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
       <nav>
         <Drawer
           container={container}
@@ -183,14 +292,17 @@ function HomeNavbar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, 
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
-            },
+              backgroundColor: '#1A1A1D',
+              color: '#fff',
+
+            }, '&:hover': { color: '#FBBC04' }
           }}
         >
           {drawer}
@@ -205,11 +317,23 @@ function HomeNavbar(props) {
 }
 
 HomeNavbar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
 export default HomeNavbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

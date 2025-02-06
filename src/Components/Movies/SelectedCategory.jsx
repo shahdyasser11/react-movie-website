@@ -1,6 +1,6 @@
 import { useOutletContext, useParams } from 'react-router-dom';
 import MoviesCard from '../MoviesCards/MoviesCards';
-import { Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 
 const SelectedCategory = () => {
@@ -57,8 +57,16 @@ return (
         ))}
       </Grid>
     ) : (
-      <p>No movies found in this category.</p>
-    )}
+      <Box  container
+      spacing={3}
+      justifyContent="center"
+      alignItems="center">
+        <Typography sx={{color:"red", pl:2}} xs={12} sm={6} md={4} lg={3} >
+        No movies found in this category
+        </Typography>
+      </Box>
+    )
+    }
   </div>
 );
 

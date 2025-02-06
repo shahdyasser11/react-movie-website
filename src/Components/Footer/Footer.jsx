@@ -5,7 +5,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import GestureIcon from '@mui/icons-material/Gesture';
-import EditAttributesIcon from '@mui/icons-material/EditAttributes';
+import { useNavigate } from "react-router-dom";
+import { LinkedIn } from "@mui/icons-material";
 
 const Footer = () => {
   const navToExternal = (url) => {
@@ -14,7 +15,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#1A1A1D",
+        backgroundColor: "#212121",
         color: "#fff",
         py: 4,
         px: 2,
@@ -27,7 +28,7 @@ const Footer = () => {
         }}>
         {/* Logo Section */}
         <Grid item xs={12} md={2}>
-          <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: "1rem", fontSize: "2rem",pr:"2rem"}}>
+          <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: "1rem", fontSize: "2rem" }}>
             Ple<span style={{ color: '#FFC107' }}>x</span>
           </Typography>
         </Grid>
@@ -39,7 +40,7 @@ const Footer = () => {
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
             <Link
-              href="#"
+              href="/about"
               color="#BBBBBB"
               underline="none"
               sx={{
@@ -713,13 +714,13 @@ const Footer = () => {
         fontSize: "5rem",
         transition: "color 0.5s ease",
         "&:hover": {
-          color: "#16C47F",
+          color: "#2196f3",
         },
       }}
       onClick={()=>{navToExternal('https://www.linkedin.com/company/plex-inc/')}}
 
     >
-      <EditAttributesIcon />
+      <LinkedIn />
     </IconButton>
   </Box>
 
