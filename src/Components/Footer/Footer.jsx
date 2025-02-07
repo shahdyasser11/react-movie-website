@@ -576,7 +576,7 @@ const Footer = () => {
 
   {/* Text Section */}
   <Typography variant="body2" color="#BBBBBB" component="span">
-    Copyright &copy; 2025&nbsp;
+    Shahd & Menna &copy; 2025&nbsp;
     <Box
       component="span"
       sx={{
