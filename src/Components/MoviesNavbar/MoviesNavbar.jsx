@@ -7,9 +7,6 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -52,23 +49,20 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.page} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handlePageNavigation(item.route)}>
-              <ListItemText primary={item.page} />
-            </ListItemButton>
-          </ListItem>
+          <Button
+      key={item.page}
+      sx={{
+        color: '#fff',
+        mx: 3,
+        display: { xs: 'block', sm: 'block' }, // Hide on small screens
+        '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
+      }}
+      onClick={() => handlePageNavigation(item.route)}
+    >
+      {item.page}
+    </Button>
         ))}
         <Divider />
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary="Sign In" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: 'center' }}>
-            <ListItemText primary="Sign Up" />
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );
@@ -84,6 +78,7 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
 
   const movieOptions = Array.from(uniqueMovies.values());
 
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -98,61 +93,8 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
               <Typography variant="h6" sx={{ fontFamily: 'Comfortaa, sans-serif', fontWeight: 700 }}>
                 Ple<span style={{ color: '#FFC107' }}>x</span>
               </Typography>
-
-              {/* Search Box */}
-              <Autocomplete
-      disablePortal
-      options={movieOptions}
-      getOptionLabel={(option) => option.label}
-      onChange={(event, value) => {
-        if (handleSelectedMovie) {
-          if(value){
-            handleSelectedMovie(value.movieData);
-                        navigate(`/Movies/${value.movieData.id}`);
-
-          }
-          else{
-            navigate(`/Movies`);
-
-          }
-          }
-        
-      }}
-      sx={{
-        width: 200,
-        '& .MuiOutlinedInput-root': {
-          borderRadius: '15px',
-          height: '30px',
-          '& fieldset': {
-            borderColor: 'white',
-          },
-          '&:hover fieldset': {
-            borderColor: '#FFC107',
-          },
-        },
-        '& .MuiInputLabel-root': {
-          color: 'white',
-          top: '-12px',
-        },
-        '& .MuiInputBase-root': {
-          height: '30px',
-          color: 'white',
-        },
-        '& .MuiInputBase-input': {
-          color: 'white',
-        },
-        '& .MuiSvgIcon-root': {
-          color: 'white',
-        },
-      }}
-      renderInput={(params) => <TextField {...params} label="Search" />}
-    />
-
-              {selectedMovie && (
-                handleSelectedMovie(selectedMovie)
-              )}
             </Box>
-
+  
             {/* Center Section */}
             <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
               {navItems.map((item) => (
@@ -170,57 +112,68 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
               ))}
             </Box>
           </Box>
-
+  
           {/* Right Section */}
-          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-            <Button sx={{ color: '#fff', mr: 3, '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' } }}>
-              Sign In
-            </Button>
-            <Button sx={{ color: '#fff', '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' } }}>
-              Sign Up
-            </Button>
-          </Box>
-
-          {/*  Drawer */}
-          <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center' }}>
-            <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle} edge="start" sx={{ ml: 2, fontSize: '2rem', '&:hover': { color: '#FBBC04' } }}>
-              <MenuIcon />
-            </IconButton>
+          <Box sx={{ display: { xs: 'block', sm: 'block' }, alignItems: 'center' }}>
+            {/* Search Box */}
+            <Autocomplete
+              disablePortal
+              options={movieOptions}
+              getOptionLabel={(option) => option.label}
+              onChange={(event, value) => {
+                if (handleSelectedMovie) {
+                  if (value) {
+                    handleSelectedMovie(value.movieData);
+                    navigate(`/Movies/${value.movieData.id}`);
+                  } else {
+                    navigate(`/Movies`);
+                  }
+                }
+              }}
+              sx={{
+                width: 200,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '15px',
+                  height: '30px',
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#FFC107',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'white',
+                  top: '-12px',
+                },
+                '& .MuiInputBase-root': {
+                  height: '30px',
+                  color: 'white',
+                },
+                '& .MuiInputBase-input': {
+                  color: 'white',
+                },
+                '& .MuiSvgIcon-root': {
+                  color: 'white',
+                },
+              }}
+              renderInput={(params) => <TextField {...params} label="Search" />}
+            />
+  
+            {selectedMovie && handleSelectedMovie(selectedMovie)}
           </Box>
         </Toolbar>
       </AppBar>
-
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-
+  
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>
     </Box>
   );
-}
-
-MoviesNavbar.propTypes = {
-  window: PropTypes.func,
-  // AllMovies: PropTypes.array.isRequired,
-};
+  }
+  
+  MoviesNavbar.propTypes = {
+    window: PropTypes.func,
+  };
 
 export default MoviesNavbar;

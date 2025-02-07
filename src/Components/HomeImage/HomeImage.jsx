@@ -88,7 +88,7 @@ const HomeImage = () => {
             backgroundColor: '#FFC107', 
             color: 'white', 
             fontSize: {
-              xs: '0.4rem',  // Small screens
+              xs: '0.8rem',  // Small screens
               sm: '0.9rem',    // Medium screens
               md: '1.2rem', // Large screens
             },

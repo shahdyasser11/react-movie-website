@@ -99,6 +99,16 @@ function HomeNavbar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const handleDrawerSignIn = () => {
+    setMobileOpen(false);
+    setSignInOpen(true);
+  };
+
+  const handleDrawerSignUp = () => {
+    setMobileOpen(false);
+    setSignUpOpen(true);
+  };
+
   const handlePageNavigation = (pageRoute) => {
     setMobileOpen(false);
     navigate(pageRoute);
@@ -140,13 +150,13 @@ function HomeNavbar(props) {
         {!isLoggedIn ? (
           <>
             <ListItem disablePadding>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <SignIn onLoginSuccess={handleLoginSuccess} />
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerSignUp}>
+                <SignIn  />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <SignUp onSignupSuccess={handleSignupSuccess} />
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={handleDrawerSignIn} >
+                <SignUp  />
               </ListItemButton>
             </ListItem>
           </>
@@ -229,14 +239,26 @@ function HomeNavbar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
             {!isLoggedIn ? (
               <>
-                <SignUp onSignupSuccess={handleSignupSuccess} open={signUpOpen}
-                  onClose={() => setSignUpOpen(false)}
-                  onSwitchAuth={handleOpenSignIn} />
-
-                <SignIn onLoginSuccess={handleLoginSuccess} open={signInOpen}
-                  onClose={() => setSignInOpen(false)}
-                  onSwitchAuth={handleOpenSignUp} />
-              </>
+              <Button 
+                onClick={handleDrawerSignUp}
+                sx={{
+                  color: '#fff',
+                  mr: 3,
+                  '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
+                }}
+              >
+                Sign Up
+              </Button>
+              <Button 
+                onClick={handleDrawerSignIn}
+                sx={{
+                  color: '#fff',
+                  '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
+                }}
+              >
+                Sign In
+              </Button>
+            </>
             ) : (
               <>
                 <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
@@ -273,6 +295,25 @@ function HomeNavbar(props) {
           </Box>
         </Toolbar>
       </AppBar>
+
+      <SignIn 
+        open={signInOpen}
+        onClose={() => setSignInOpen(false)}
+        onSwitchAuth={() => {
+          setSignInOpen(false);
+          setSignUpOpen(true);
+        }}
+        onLoginSuccess={handleLoginSuccess}
+      />
+      <SignUp 
+        open={signUpOpen}
+        onClose={() => setSignUpOpen(false)}
+        onSwitchAuth={() => {
+          setSignUpOpen(false);
+          setSignInOpen(true);
+        }}
+        onSignupSuccess={handleSignupSuccess}
+      />
 
       <Snackbar
         open={snackbarOpen}

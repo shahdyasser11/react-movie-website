@@ -12,7 +12,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
-export default function MoviesCard({ movie,allCategories }) {
+export default function MoviesCard({ movie, allCategories }) {
 
   const [copyText, setCopyText] = useState("Copy");
   const [open, setOpen] = React.useState(false);
@@ -26,13 +26,13 @@ export default function MoviesCard({ movie,allCategories }) {
   const handleCopy = () => {
     navigator.clipboard.writeText(movie.title);
     setCopyText("Copied!");
-  
+
     setTimeout(() => {
       setCopyText("Copy");
     }, 1000);
   };
 
- 
+
 
   const handleShareToWhatsApp = () => {
     const message = `Check out this movie: ${movie.title}`;
@@ -59,7 +59,7 @@ export default function MoviesCard({ movie,allCategories }) {
         display: 'flex',
         flexDirection: 'column',
         width: '20rem',
-        height: '25rem',
+        height: '26rem',
         marginBottom: '2rem',
         transition: '0.1s ease-in-out',
         '&:hover': {
@@ -69,15 +69,17 @@ export default function MoviesCard({ movie,allCategories }) {
       }}
     >
 
-<CardMedia
+      <CardMedia
         sx={{
-          height: '15rem',
+          height: '18rem',
           width: '100%',
           objectFit: 'cover',
-          // objectPosition:'top',
+          backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
           flexShrink: 0,
         }}
-        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         title={movie.title}
       />
       <CardContent sx={{ flexGrow: 1, overflow: 'hidden' }}>
@@ -112,7 +114,7 @@ export default function MoviesCard({ movie,allCategories }) {
             textAlign: "center",
           }}
         >
-          <Typography id="modal-title" variant="h6" component="h2" sx={{ color: "#FFC107"}}>
+          <Typography id="modal-title" variant="h6" component="h2" sx={{ color: "#FFC107" }}>
             Share Movie
           </Typography>
           <Typography id="modal-description" sx={{ mt: 2 }}>
@@ -133,79 +135,79 @@ export default function MoviesCard({ movie,allCategories }) {
               variant="contained" onClick={handleCopy} sx={{ bgcolor: "#FFC107", "&:hover": { bgcolor: "#FFA000" } }}
             >            {copyText}
             </Button>
-            <WhatsAppIcon  onClick={handleShareToWhatsApp} sx={{"&:hover": { color: "green" } ,cursor:'pointer',}}  />
-            <MailOutlineIcon onClick={handleShareToGmail} sx={{"&:hover": { color: "blue" } ,cursor:'pointer',}}  />
-            <TelegramIcon onClick={handleShareToTelegram} sx={{"&:hover": { color: "#48A6A7" } ,cursor:'pointer',}}  />
-            <Button variant="outlined" onClick={handleClose} sx={{ color: "#FFC107",borderColor:"#FFC107", "&:hover": { color: "#FFA000" }}}>
+            <WhatsAppIcon onClick={handleShareToWhatsApp} sx={{ "&:hover": { color: "green" }, cursor: 'pointer', }} />
+            <MailOutlineIcon onClick={handleShareToGmail} sx={{ "&:hover": { color: "blue" }, cursor: 'pointer', }} />
+            <TelegramIcon onClick={handleShareToTelegram} sx={{ "&:hover": { color: "#48A6A7" }, cursor: 'pointer', }} />
+            <Button variant="outlined" onClick={handleClose} sx={{ color: "#FFC107", borderColor: "#FFC107", "&:hover": { color: "#FFA000" } }}>
               Close
             </Button>
           </Box>
         </Box>
       </Modal>
-     
-     {/* details modal */}
-     <Modal open={openDetails} onClose={handleCloseDetails} aria-labelledby="modal-title" aria-describedby="modal-description">
-     <Box
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '60%',
-          bgcolor: 'background.paper',
-          boxShadow: 24,
-          p: 4,
-          borderRadius: 2,
-        }}
-      >
-        <Grid container spacing={3}>
-          {/* Movie Photo */}
-          <Grid item xs={12} md={4}>
-            <CardMedia
-              sx={{
-                height: 300, 
-                width: '100%',
-                objectFit: 'cover',
-              }}
-              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              title={movie.title}
-            />
-          </Grid>
 
-          {/*  Movie Name and Overview */}
-          <Grid item xs={12} md={8}>
-            <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-              {movie.title}
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 2 }}>
-              {movie.overview} 
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis',pt:2 }}>
-          Release Date: {movie.release_date}
-        </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          Vote Count:  {movie.vote_count}
-        </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-        Categories:{" "}
-      {movie.genre_ids
-        .map((id) => allCategories.find((cat) => cat.id === id)?.name)
-        .filter(Boolean)
-        .join(", ")}
-        </Typography>
+      {/* details modal */}
+      <Modal open={openDetails} onClose={handleCloseDetails} aria-labelledby="modal-title" aria-describedby="modal-description">
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '60%',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 2,
+          }}
+        >
+          <Grid container spacing={3}>
+            {/* Movie Photo */}
+            <Grid item xs={12} md={4}>
+              <CardMedia
+                sx={{
+                  height: 300,
+                  width: '100%',
+                  objectFit: 'cover',
+                }}
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                title={movie.title}
+              />
+            </Grid>
+
+            {/*  Movie Name and Overview */}
+            <Grid item xs={12} md={8}>
+              <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
+                {movie.title}
+              </Typography>
+              <Typography variant="body2" sx={{ mt: 2 }}>
+                {movie.overview}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis', pt: 2 }}>
+                Release Date: {movie.release_date}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Vote Count:  {movie.vote_count}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Categories:{" "}
+                {movie.genre_ids
+                  .map((id) => allCategories.find((cat) => cat.id === id)?.name)
+                  .filter(Boolean)
+                  .join(", ")}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-         {/* Close Button */}
-         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-         <Button variant="outlined" onClick={handleCloseDetails} sx={{ color: "#FFC107",borderColor:"#FFC107", "&:hover": { color: "#FFA000" }}}>
+          {/* Close Button */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button variant="outlined" onClick={handleCloseDetails} sx={{ color: "#FFC107", borderColor: "#FFC107", "&:hover": { color: "#FFA000" } }}>
               Close
-          </Button>
+            </Button>
+          </Box>
         </Box>
-      </Box>
       </Modal>
 
-      
-      
+
+
 
     </Card>
   );
