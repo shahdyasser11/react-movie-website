@@ -22,7 +22,7 @@ export default function DevicesBox() {
     <Box sx={{ width: "100%", p: 4, mb: 4 }}>
       <Stack spacing={1} alignItems="center">
         <Typography sx={{ color: "white", fontWeight: "800", fontSize: "1.5rem", mt: 2 }}>
-          Take Plex everywhere
+          Take MovieNest everywhere
         </Typography>
         <Typography sx={{ color: "#B7B7B7" }}>
           Watch free anytime, anywhere, on almost any device

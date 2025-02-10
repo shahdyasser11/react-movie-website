@@ -69,19 +69,23 @@ export default function MoviesCard({ movie, allCategories }) {
       }}
     >
 
-      <CardMedia
-        sx={{
-          height: '18rem',
-          width: '100%',
-          objectFit: 'cover',
-          backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          flexShrink: 0,
-        }}
-        title={movie.title}
-      />
+<CardMedia
+  component="div"
+  sx={{
+    height: '18rem',
+    width: '100%',
+    backgroundImage: `url(${movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : defaultImage})`,
+    backgroundSize: '100%',
+    backgroundPosition: 'top center',
+    backgroundRepeat: 'no-repeat',
+    flexShrink: 0,
+
+  }}
+  title={movie.title}
+/>
+
+
+
       <CardContent sx={{ flexGrow: 1, overflow: 'hidden' }}>
         <Typography gutterBottom variant="h5" component="div">
           {movie.title}

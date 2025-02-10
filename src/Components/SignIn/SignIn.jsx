@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -24,6 +24,7 @@ import img4 from '../../imgs/The Family Plan (2023).jpg';
 import img5 from '../../imgs/Centigrade.jpg';
 import img6 from '../../imgs/Extinction Miguel Angel Vivas.jpg';
 
+
 const sliderImages = [
   img1,
   img2,
@@ -35,6 +36,17 @@ const sliderImages = [
 
 
 export const SignIn = ({ open, onClose, onSwitchAuth, onLoginSuccess }) => {
+  
+  useEffect(() => {
+    if (open) {
+      const root = document.getElementById("root");
+      if (root) {
+        root.removeAttribute("aria-hidden");
+      }
+
+      document.getElementById("email-input")?.focus();
+    }
+  }, [open]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,8 +82,8 @@ export const SignIn = ({ open, onClose, onSwitchAuth, onLoginSuccess }) => {
         Sign Up
       </Button>
 
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
-        <DialogTitle>
+      <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg" disableEnforceFocus>
+      <DialogTitle>
           <IconButton onClick={() => { onClose(false) }} sx={{ position: "absolute", right: 10, top: 10 }}>
             <Close />
           </IconButton>
@@ -154,7 +166,7 @@ export const SignIn = ({ open, onClose, onSwitchAuth, onLoginSuccess }) => {
                 >
                   Sign In
                 </Button>
-                <Typography variant="body1" color="initial" sx={{ textAlign: "center", paddingTop: 5 }} >Need an account? Press the Google or Apple buttons above, or<br /> <Link component="button" onClick={() => {
+                <Typography variant="body1" color="black" sx={{ textAlign: "center", paddingTop: 5 }} >Need an account? Press the Google or Apple buttons above, or<br /> <Link component="button" onClick={() => {
                   onClose();
                   onSwitchAuth();
                 }} > Sign Up with email</Link></Typography>
@@ -168,24 +180,3 @@ export const SignIn = ({ open, onClose, onSwitchAuth, onLoginSuccess }) => {
   );
 };
 export default SignIn;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

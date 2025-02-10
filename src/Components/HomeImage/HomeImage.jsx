@@ -78,7 +78,7 @@ const HomeImage = () => {
             mb: 4,
           }}
         >
-          The search is over! Let Plex help you find the perfect
+          The search is over! Let MovieNest help you find the perfect
           <br />
           movie to watch tonight.
         </Typography>

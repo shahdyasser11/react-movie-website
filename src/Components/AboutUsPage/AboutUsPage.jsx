@@ -9,13 +9,14 @@ import {
   useMediaQuery,
   Divider
 } from '@mui/material';
-import SideImage from '../../imgs/Plex Live TV and DVR features arrive on Android and Apple TV.jpg';
+
+import SideImage from '../../imgs/side-img.png';
 
 
 const AboutUsPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const videoId = '811134308';
+  const videoId = '1053754233';
 
   return (
     <Box sx={{ backgroundColor: '#f5f5f5', py: 8 }}>
@@ -38,7 +39,7 @@ const AboutUsPage = () => {
             fontFamily: 'Comfortaa, sans-serif',
           }}
         >
-          Of movies, shows, music, and well, all things entertainment. So much so that we built an app that brings it all together—streaming services, personal media, ratings and watch lists.As beautiful as it is easy-to-use, Plex gives fans everywhere a way to discover, save, and enjoy the entertainment they love the most.
+          Of movies, shows, music, and well, all things entertainment. So much so that we built an app that brings it all together—streaming services, personal media, ratings and watch lists.As beautiful as it is easy-to-use, MovieNest gives fans everywhere a way to discover, save, and enjoy the entertainment they love the most.
         </Typography>
 
         <Grid container spacing={4} alignItems="center" py={8}>
@@ -46,14 +47,15 @@ const AboutUsPage = () => {
           <Grid item xs={12} md={6}>
             <Paper elevation={3} sx={{ borderRadius: 2, overflow: 'hidden', }} >
               <Box
-                sx={{
-                  height: isMobile ? 300 : 400,
-                  backgroundImage: `url(${SideImage})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-
-                }}
-              />
+               sx={{
+                 position: 'relative', 
+                 height: isMobile ? 300 : 400,
+                 backgroundImage: `url(${SideImage})`,
+                 backgroundSize: 'cover',
+                 backgroundPosition: 'center',
+                 borderRadius: 2, 
+               }}
+             />
             </Paper>
           </Grid>
 
@@ -68,7 +70,7 @@ const AboutUsPage = () => {
                 color: 'gray'
               }}
             >
-              Welcome to Ple<span style={{ color: '#FFC107' }}>x</span>
+              Welcome to Movie<span style={{ color: '#FFC107' }}>Nest</span>
             </Typography>
 
             <Typography
@@ -159,7 +161,7 @@ const AboutUsPage = () => {
                 color: 'text.primary',
 
               }}>
-                What is
+                Releasing soon in
               </Typography>
               <Typography variant="h2" sx={{
                 fontWeight: 'bold',
@@ -167,7 +169,7 @@ const AboutUsPage = () => {
                 textTransform: 'uppercase',
                 paddingBottom: 7
               }}>
-                Ple<span style={{ color: '#FFC107' }}>x</span> <span style={{ color: 'black' }}>?</span>
+                Movie<span style={{ color: '#FFC107' }}>Nest</span>
               </Typography>
             </Box>
           </Grid>
@@ -182,7 +184,7 @@ const AboutUsPage = () => {
           }}>
 
             <iframe
-              title="Plex Introduction Video"
+              title="MovieNest Releasing soon "
               style={{
                 position: 'absolute',
                 top: 0,
@@ -196,6 +198,7 @@ const AboutUsPage = () => {
               allowFullScreen
             />
           </Box>
+
         </Container>
 
         <Divider sx={{ my: 6 }} />
@@ -219,7 +222,7 @@ const AboutUsPage = () => {
             lineHeight: 1.6,
             fontSize: '1.1rem'
           }}>
-            Plex is your ultimate streaming platform, offering a vast library of movies,
+            MovieNest is your ultimate streaming platform, offering a vast library of movies,
             TV shows, and original content. With personalized recommendations and
             seamless cross-device compatibility, discover new favorites and watch
             anywhere, anytime.

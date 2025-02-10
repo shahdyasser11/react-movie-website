@@ -19,7 +19,7 @@ import { useState } from 'react';
 
 
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 const navItems = [{ page: 'Home', route: '/' }];
 
 function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handleSelectedMovie }) {
@@ -41,33 +41,33 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
     navigate(pageRoute);
   };
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Plex
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <Button
-      key={item.page}
-      sx={{
-        color: '#fff',
-        mx: 3,
-        display: { xs: 'block', sm: 'block' }, // Hide on small screens
-        '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
-      }}
-      onClick={() => handlePageNavigation(item.route)}
-    >
-      {item.page}
-    </Button>
-        ))}
-        <Divider />
-      </List>
-    </Box>
-  );
+  // const drawer = (
+  //   <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+  //     <Typography variant="h6" sx={{ my: 2 }}>
+  //       MovieNest
+  //     </Typography>
+  //     <Divider />
+  //     <List>
+  //       {navItems.map((item) => (
+  //         <Button
+  //     key={item.page}
+  //     sx={{
+  //       color: '#fff',
+  //       mx: 3,
+  //       display: { xs: 'block', sm: 'block' }, // Hide on small screens
+  //       '&:hover': { color: '#FBBC04', bgcolor: '#1A1A1D' },
+  //     }}
+  //     onClick={() => handlePageNavigation(item.route)}
+  //   >
+  //     {item.page}
+  //   </Button>
+  //       ))}
+  //       <Divider />
+  //     </List>
+  //   </Box>
+  // );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  // const container = window !== undefined ? () => window().document.body : undefined;
   const uniqueMovies = new Map();
 
   [...allMovies, ...topRatedMovies, ...upcomingMovies].forEach(movie => {
@@ -91,7 +91,7 @@ function MoviesNavbar({ window, allMovies, topRatedMovies, upcomingMovies, handl
                 <SlideshowIcon />
               </IconButton>
               <Typography variant="h6" sx={{ fontFamily: 'Comfortaa, sans-serif', fontWeight: 700 }}>
-                Ple<span style={{ color: '#FFC107' }}>x</span>
+                Movie<span style={{ color: '#FFC107' }}>Nest</span>
               </Typography>
             </Box>
   

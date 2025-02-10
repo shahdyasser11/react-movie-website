@@ -125,9 +125,18 @@ export const SignUp = ({ open, onClose, onSwitchAuth, onSignupSuccess }) => {
 
                 <Box display="flex" alignItems="center" gap={2} sx={{ paddingTop: 5 }}>
                   <Box flex={1} height={1} bgcolor="text.disabled" />
-                  <Typography variant="body2" color="textSecondary" textAlign={"center"}>
-                    By signing up or continuing to use Plex you confirm that you've read and accept the <Link to="https://www.plex.tv/about/privacy-legal/plex-terms-of-service" target="_blank">Terms of Service</Link> and <Link to="https://www.plex.tv/about/privacy-legal" target="_blank" >Privacy Policy</Link>
-                  </Typography>
+                  <Typography 
+  variant="body2" 
+  color="textSecondary" 
+  textAlign="center" 
+  component="span"
+>
+  By signing up or continuing to use Plex you confirm that you've read and accept the 
+  <Link to="https://www.plex.tv/about/privacy-legal/plex-terms-of-service" target="_blank"> Terms of Service</Link> 
+  and 
+  <Link to="https://www.plex.tv/about/privacy-legal" target="_blank"> Privacy Policy</Link>
+</Typography>
+
                   <Box flex={1} height={1} bgcolor="text.disabled" />
                 </Box>
 
@@ -151,29 +160,36 @@ export const SignUp = ({ open, onClose, onSwitchAuth, onSignupSuccess }) => {
                   margin="normal"
                 />
 
-                <FormHelperText>
-                  <Typography variant="body2" color="black">Password Requirements:</Typography>
-                  <List dense>
-                    {[
-                      { text: "10+ characters", key: "length" },
-                      { text: "Uppercase letter", key: "uppercase" },
-                      { text: "Lowercase letter", key: "lowercase" },
-                      { text: "Number", key: "number" },
-                      { text: "Special character (!@#$%^&*)", key: "special" },
-                    ].map((req) => (
-                      <ListItem key={req.key}>
-                        <ListItemIcon>
-                          {passwordRequirements[req.key] ? (
-                            <Check style={{ color: "green" }} />
-                          ) : (
-                            <Close style={{ color: "red" }} />
-                          )}
-                        </ListItemIcon>
-                        <ListItemText primary={req.text} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </FormHelperText>
+<Typography variant="body2" color="black">
+  Password Requirements:
+</Typography>
+
+<FormHelperText>
+  Your password must include the following:
+</FormHelperText>
+
+<List dense>
+  {[
+    { text: "10+ characters", key: "length" },
+    { text: "Uppercase letter", key: "uppercase" },
+    { text: "Lowercase letter", key: "lowercase" },
+    { text: "Number", key: "number" },
+    { text: "Special character (!@#$%^&*)", key: "special" },
+  ].map((req) => (
+    <ListItem key={req.key}>
+      <ListItemIcon>
+        {passwordRequirements[req.key] ? (
+          <Check style={{ color: "green" }} />
+        ) : (
+          <Close style={{ color: "red" }} />
+        )}
+      </ListItemIcon>
+      <ListItemText primary={req.text} />
+    </ListItem>
+  ))}
+</List>
+
+
 
                 <Button
                   variant="contained"
@@ -186,11 +202,22 @@ export const SignUp = ({ open, onClose, onSwitchAuth, onSignupSuccess }) => {
                   Create an Account
                 </Button>
 
-                <Typography variant="body1" color="initial" sx={{ textAlign: "center", paddingTop: 4 }} >Already have an account?<Link component="button"
-                  onClick={() => {
-                    onClose();
-                    onSwitchAuth();
-                  }} > Sign In</Link></Typography>
+                <Box sx={{ textAlign: "center", paddingTop: 4 }}>
+  <Typography variant="body1" color="black" component="span">
+    Already have an account? 
+  </Typography>
+  <Link component="button"
+    onClick={() => {
+      onClose();
+      onSwitchAuth();
+    }} 
+    sx={{ ml: 1, textDecoration: "underline", background: "none", border: "none", cursor: "pointer", color: "blue" }}
+  >
+    Sign In
+  </Link>
+</Box>
+
+
               </Grid>
             </Grid>
           </form>

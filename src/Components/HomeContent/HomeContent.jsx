@@ -150,7 +150,7 @@ const HomeContent = () => {
                         <br />
                         discover more, search faster, and get curated
                         <br />
-                        recommendations—all without ever leaving Plex.<br />
+                        recommendations—all without ever leaving MovieNest.<br />
                         Connect with friends to see who’s watching
                         <br />
                         what, where.
@@ -270,7 +270,7 @@ const HomeContent = () => {
                 textAlign: { xs: 'center', sm: 'center', md: 'left' },
               }}
             >
-              Once you register for a free account with Plex, we’ll keep your place from screen to screen as long as you’re signed in. No matter what device you choose, your free movies will pick up where you left off with ease.
+              Once you register for a free account with MovieNest, we’ll keep your place from screen to screen as long as you’re signed in. No matter what device you choose, your free movies will pick up where you left off with ease.
             </Typography>
             <Button
               variant="contained"
@@ -312,35 +312,30 @@ const HomeContent = () => {
     <Grid container spacing={1} justifyContent="center">
         {/* Partners grids */}
         <Grid item xs={12}>
-            <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-                {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
-                    <Grid key={index} item>
-                        <Paper
-                            sx={{
-                                height: 100,
-                                width: 120,
-                                backgroundColor: '#fff',
-                                boxShadow: 2,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <img
-                                src={imageSrc}
-                                alt={`photo${index + 1}`}
-                                style={{
-                                    width: '70%',
-                                    height: '70%',
-                                    objectFit: 'cover',
-                                    borderRadius: '8px',
-                                }}
-                            />
-                        </Paper>
-                    </Grid>
-                ))}
-            </Grid>
-        </Grid>
+  <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+    {[paramount, wb, mgm, lionsGate, legendary, magnolia].map((imageSrc, index) => (
+      <Grid key={index} item>
+        <Paper
+          sx={{
+            height: 100,
+            width: 120,
+            backgroundColor: '#fff',
+            boxShadow: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundImage: `url(${imageSrc})`, 
+            backgroundSize: 'contain',
+            backgroundPosition: 'center', 
+            backgroundRepeat: 'no-repeat',
+            borderRadius: '8px',
+          }}
+        />
+      </Grid>
+    ))}
+  </Grid>
+</Grid>
+
     </Grid>
 </Box>
 

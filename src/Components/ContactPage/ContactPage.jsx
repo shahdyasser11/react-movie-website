@@ -21,7 +21,7 @@ const ContactPage = () => {
     {
       icon: <LocationOn sx={{ fontSize: 50, color: '#FFC107', mb: 2 }} />,
       title: 'Location',
-      text: '123 Plex Avenue, San Francisco, CA 94107, United States',
+      text: '147 Avenue, San Francisco, CA 94107, United States',
     },
   ];
 
@@ -116,7 +116,7 @@ const ContactPage = () => {
         mb: 7,
         color: '#616161'
       }}>
-        Contact Ple<span style={{ color: '#FFC107' }}>x</span>
+        Contact  Movie<span style={{ color: '#FFC107' }}>Nest</span>
       </Typography>
 
       <Grid container spacing={8}>
@@ -150,7 +150,7 @@ const ContactPage = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <LocationOn sx={{ fontSize: 30, color: ' #FFC107' }} />
                 <Typography>
-                  123 Plex Avenue ,
+                  147 Avenue ,
                   San Francisco, CA 94107<br />
                   United States
                 </Typography>
@@ -163,7 +163,7 @@ const ContactPage = () => {
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <Email sx={{ fontSize: 30, color: ' #FFC107' }} />
-                <Typography>support@plex.com</Typography>
+                <Typography>support@movieNest.com</Typography>
               </Box>
             </Box>
 
@@ -173,16 +173,16 @@ const ContactPage = () => {
                 Follow Us
               </Typography>
               <Box sx={{ display: 'flex', gap: 2 }}>
-                <Link color="inherit" href="https://web.facebook.com/plexapp?_rdc=1&_rdr#" target="_blank">
+                <Link color="inherit" href="https://www.facebook.com/" target="_blank">
                   <Facebook sx={{ fontSize: 40, color: '#616161', '&:hover': { color: ' #344CB7' } }} />
                 </Link>
-                <Link color="inherit" href="https://www.instagram.com/plex.tv/" target="_blank">
+                <Link color="inherit" href="https://www.instagram.com/" target="_blank">
                   <Instagram sx={{ fontSize: 40, color: '#616161', '&:hover': { color: '#f73378' } }} />
                 </Link>
-                <Link color="inherit" href="https://www.linkedin.com/company/plex-inc/" target="_blank">
+                <Link color="inherit" href="https://www.linkedin.com/" target="_blank">
                   <LinkedIn sx={{ fontSize: 40, color: '#616161', '&:hover': { color: '#2196f3' } }} />
                 </Link>
-                <Link color="inherit" href="https://www.youtube.com/user/plextvapp" target="_blank">
+                <Link color="inherit" href="https://www.youtube.com/" target="_blank">
                   <YouTube sx={{ fontSize: 45, color: '#616161', '&:hover': { color: '#F93827' } }} />
                 </Link>
               </Box>

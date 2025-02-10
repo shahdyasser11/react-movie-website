@@ -5,7 +5,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import GestureIcon from '@mui/icons-material/Gesture';
-import { useNavigate } from "react-router-dom";
 import { LinkedIn } from "@mui/icons-material";
 
 const Footer = () => {
@@ -29,7 +28,7 @@ const Footer = () => {
         {/* Logo Section */}
         <Grid item xs={12} md={2}>
           <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: "1rem", fontSize: "2rem" }}>
-            Ple<span style={{ color: '#FFC107' }}>x</span>
+            Movie<span style={{ color: '#FFC107' }}>Nest</span>
           </Typography>
         </Grid>
 
@@ -134,7 +133,7 @@ const Footer = () => {
                   },
                 }}
               >
-                Plex Gear
+                MovieNest Gear
               </Link>
             </Box>
             <Box>
@@ -148,7 +147,7 @@ const Footer = () => {
                   },
                 }}
               >
-                The Plex Blog
+                The MovieNest Blog
               </Link>
             </Box>
             <Box>
@@ -168,10 +167,10 @@ const Footer = () => {
           </Box>
         </Grid>
 
-        {/* Plex Pass Section */}
+        {/* MovieNest Pass Section */}
         <Grid item xs={4} md={2} sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
           <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-            Plex Pass
+            MovieNest Pass
           </Typography>
           <Box>
             <Link
@@ -198,7 +197,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plexamp
+              MovieNest amp
             </Link>
           </Box>
           <Box>
@@ -212,7 +211,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plex Labs
+              MovieNest Labs
             </Link>
           </Box>
           <Box>
@@ -247,7 +246,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plex Media Server
+              Media Server
             </Link>
           </Box>
           <Box>
@@ -261,7 +260,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plex
+              MovieNest
             </Link>
           </Box>
           <Box>
@@ -275,7 +274,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plexamp
+              MovieNestamp
             </Link>
           </Box>
           <Box>
@@ -289,7 +288,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plex Photos
+              MovieNest Photos
             </Link>
           </Box>
           <Box>
@@ -303,7 +302,7 @@ const Footer = () => {
                 },
               }}
             >
-              Plex Dash
+              MovieNest Dash
             </Link>
           </Box>
           <Box>
@@ -471,7 +470,7 @@ const Footer = () => {
                 },
               }}
             >
-              Discover on Plex
+              Discover on MovieNest
             </Link>
           </Box>
           <Box>
@@ -511,7 +510,9 @@ const Footer = () => {
                 "&:hover": {
                   color: "#FFC107",
                 },
-              }}
+                whiteSpace: "nowrap", 
+                display: "inline-block",
+                            }}
             >
               What To Watch on Netflix
             </Link>
@@ -589,7 +590,7 @@ const Footer = () => {
         },
       }}
     >
-      Plex
+      MovieNest
     </Box>
     <Box
       component="span"
@@ -655,7 +656,7 @@ const Footer = () => {
           color: "#A35C7A",
         },
       }}
-      onClick={()=>{navToExternal('https://www.instagram.com/plex.tv/')}}
+      onClick={()=>{navToExternal('https://www.instagram.com/')}}
     >
       <InstagramIcon />
     </IconButton>
@@ -670,7 +671,7 @@ const Footer = () => {
           color: "#344CB7",
         },
       }}
-      onClick={()=>{navToExternal('https://web.facebook.com/plexapp?_rdc=1&_rdr#')}}
+      onClick={()=>{navToExternal('https://www.facebook.com/')}}
 
     >
       <FacebookIcon />
@@ -686,7 +687,7 @@ const Footer = () => {
           color: "#DEAA79",
         },
       }}
-      onClick={()=>{navToExternal('https://bsky.app/profile/plextv.bsky.social')}}
+      onClick={()=>{navToExternal('https://bsky.app/')}}
 
     >
       <GestureIcon />
@@ -702,7 +703,7 @@ const Footer = () => {
           color: "#F93827",
         },
       }}
-      onClick={()=>{navToExternal('https://www.youtube.com/user/plextvapp')}}
+      onClick={()=>{navToExternal('https://www.youtube.com/')}}
     >
       <YouTubeIcon />
     </IconButton>
@@ -717,7 +718,7 @@ const Footer = () => {
           color: "#2196f3",
         },
       }}
-      onClick={()=>{navToExternal('https://www.linkedin.com/company/plex-inc/')}}
+      onClick={()=>{navToExternal('https://www.linkedin.com/')}}
 
     >
       <LinkedIn />
